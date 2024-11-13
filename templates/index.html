@@ -1,0 +1,531 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block head%}
+    <link rel="stylesheet" href="{%static 'css/home.css'%}">
+{%endblock head%}
+{%block title%} {{title}} {%endblock title%}
+
+{%block content%}
+<section class=" container-carousel position-relative" >
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+  
+      <!-- Carousel Inner -->
+      <div class="carousel-inner">
+        <!-- Slide 1 with Parallax -->
+        <div class="parallax carousel-item active" style="background-image: url('{{ banner3 }}');">
+        </div>
+  
+        <!-- Slide 2 with Parallax -->
+        <div class="parallax carousel-item" style="background-image: url('{{banner2}}');"> 
+        </div>
+  
+        <!-- Slide 3 with Parallax -->
+        <div class="parallax carousel-item" style="background-image: url('{{banner3}}');">
+        </div>
+      </div>
+  
+      <!-- Carousel Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  
+   <!-- Graduates Count Section, positioned in the middle of the carousel -->
+      <section class="card-student position-absolute top-100 start-50 translate-middle text-center z-3 d-flex gap-2 bg-dark1 p-2 rounded-3">
+        <div class="counter bg-medium-dark color-light rounded-3 shadow">
+            <p class="fw-bold mb-0">Students</p>
+            <h6 id="counter1" class="display-4" data-target="{{student_count}}">0</h6>
+          </div>          
+        <div class="counter bg-medium-dark color-light rounded-3 shadow">
+          <p class="fw-bold mb-0">Mentor</p>
+          <h6 id="counter2" class="display-4" data-target="{{mentor_count}}">0</h6>
+        </div>
+        <div class="counter bg-medium-dark color-light rounded-3 shadow">
+          <p class="fw-bold mb-0">Class</p>
+          <h6 id="counter3" class="display-4" data-target="{{class_count}}">0</h6>
+        </div>
+      </section>
+  
+  </section>
+  
+  
+  <!-- About Us Section -->
+  <section class="align-items-center my-5 py-3">
+    
+    <div class="about-section d-flex flex-wrap justify-content-center align-items-center">
+      <img src="{%static 'images/AboutDummy.jpg'%}" class="img-fluid col-12 col-md-4 col-lg-6" alt="logo">
+      <article class="col-12 col-md-8 col-lg-6">
+        <header>
+          <h1 class="color-dark text-center  fw-bold ">About <span class="color-medium-dark">Us</span></h1>
+        </header>
+        <p class=" py-3 px-5 text-dark fs-5 rounded-3" style="text-align: justify;">
+        
+        HELU (Helping Education) adalah platform belajar bahasa Inggris untuk siswa SMA/SMK dengan pendekatan design thinking. Platform ini membantu siswa mempersiapkan ujian masuk perguruan tinggi melalui metode belajar yang interaktif dan menyenangkan.
+        HELU menyediakan video pembelajaran, latihan soal, dan forum diskusi yang memudahkan siswa memahami materi. Semua konten dirancang agar belajar lebih menarik dan menjaga motivasi siswa.
+        Bekerja sama dengan penerbit, pembuat konten, dan institusi pendidikan, HELU memastikan materi berkualitas dan relevan dengan kebutuhan siswa, mendukung kesuksesan akademik mereka.
+        </p>
+        <a class="btn px-5 bg-dark1 mx-5 color-light no-hover btn-class-info" href="{% url 'home:about' %}">View More -></a>
+    </article>
+    </div>
+  </section>
+  
+<!-- Class -->
+<section id="classes" class="py-5 bg-light1">
+    <div class="container mt-5">
+      <h2 class="text-center fw-bold mb-5 color-dark">Our <span class="color-medium-dark">Classes</span></h2>
+      <div class="row">
+        <!-- Class 1 -->
+        <div class="row">
+            {% for class in classes %}
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 text-center" id="hover-pilih-kelas">
+                    <div class="overflow-hidden">
+                        <img src="{% static 'images/' %}{{ class.image_url }}" class="card-img-top" alt="{{ class.title }}">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ class.title }}</h4>
+                        <h4 class="color-medium-dark fw-bold">Rp {{ class.price }}</h4>
+                        <ul class="list-unstyled text-start"> 
+                            <li><i class="bi bi-check-circle-fill"></i> Mulai {{ class.start_date }}</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Selama {{ class.duration }} ({{ class.sessions }}x pertemuan)</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Level: {{ class.level }}</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Jam belajar fleksibel</li>
+                        </ul>            
+                        <a href="#" class="no-hover btn bg-dark1 color-light btn-class-info">Info Selanjutnya</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Pendaftaran ditutup kapan saja jika kuota sudah penuh
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>        
+      </div>
+    <div class="d-grid">
+      <a href="class.html" class="no-hover btn bg-dark1 color-light btn-class-info btn-lg mx-auto">View All Class</a>
+    </div>
+  </section>
+  
+  <!-- Class end -->
+  
+   <!-- Price List Section -->
+  <section id="price-list" class="py-5 ">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-5 color-dark">Our <span class="color-medium-dark">Pricing Plans</span></h2>
+      
+      <div class="row justify-content-center">
+        <!-- Basic Plan -->
+        <div class="col-lg-4 col-md-6 mb-4 ">
+          <div class="card shadow-sm h-100">
+            <div class="card-header bg-medium-dark text-white text-center py-4">
+              <h4 class="fw-bold">Basic Plan</h4>
+              <h5 class="fw-bold">Rp 100.000 <small class="text-light">/month</small></h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text">Perfect for beginners looking to improve basic English skills.</p>
+              <ul class="list-unstyled">
+                <li><i class="bi bi-check-circle-fill text-success"></i> Access to 20 lessons/month</li>
+                <li><i class="bi bi-check-circle-fill text-success"></i> 1-on-1 Mentorship</li>
+                <li><i class="bi bi-check-circle-fill text-success"></i> Basic grammar tips</li>
+                <li><i class="bi bi-x-circle-fill text-danger"></i> Personalized learning path</li>
+                <li><i class="bi bi-x-circle-fill text-danger"></i> Speaking practice with natives</li>
+              </ul>
+            </div>
+            <div class="card-footer text-center">
+              <a href="#" class="btn btn-price1 bg-medium-dark btn-lg text-light">Choose Basic</a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Standard Plan -->
+        <div class="col-lg-4 col-md-6 mb-4 ">
+          <div class="card shadow-sm h-100">
+            <div class="card-header bg-medium-dark2 text-white text-center py-4">
+              <h4 class="fw-bold">Standard Plan</h4>
+              <h5 class="fw-bold">Rp 150.000 <small class="text-light">/month</small></h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text">Ideal for learners wanting more personalized guidance and feedback.</p>
+              <ul class="list-unstyled">
+                <li><i class="bi bi-check-circle-fill text-success"></i> Access to 50 lessons/month</li>
+                <li><i class="bi bi-check-circle-fill text-success"></i> 1-on-1 Mentorship</li>
+                <li><i class="bi bi-check-circle-fill text-success"></i> Basic + Advanced grammar tips</li>
+                <li><i class="bi bi-check-circle-fill text-success"></i> Personalized learning path</li>
+                <li><i class="bi bi-x-circle-fill text-danger"></i> Speaking practice with natives</li>
+              </ul>
+            </div>
+            <div class="card-footer text-center">
+              <a href="#" class="btn btn-price2 bg-medium-dark2 btn-lg text-light">Choose Standard</a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Premium Plan -->
+        <div class="col-lg-4 col-md-6 mb-4 ">
+          <div class="card shadow-sm h-100">
+            <div class="card-header bg-dark1 text-white text-center py-4">
+              <h4 class="fw-bold">Premium Plan</h4>
+              <h5 class="fw-bold">Rp 200.000 <small class="text-light">/month</small></h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text">The complete experience for learners aiming for fluency and confidence.</p>
+              <ul class="list-unstyled">
+                <li><i class="bi bi-check-circle-fill text-success"></i> Unlimited lessons</li>
+                <li><i class="bi bi-check-circle-fill text-success"></i> 1-on-1 Mentorship</li>
+                <li><i class="bi bi-check-circle-fill text-success"></i> Advanced grammar tips</li>
+                <li><i class="bi bi-check-circle-fill text-success"></i> Personalized learning path</li>
+                <li><i class="bi bi-check-circle-fill text-success"></i> Speaking practice with natives</li>
+              </ul>
+            </div>
+            <div class="card-footer text-center">
+              <a href="#" class="btn btn-price3 bg-dark1 btn-lg text-light">Choose Premium</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Price List End -->
+  
+  <!-- Discount Section -->
+  <section class="container my-5 bg-light1">
+    <div class="p-5 bg-light color-medium-light rounded shadow-lg row gap-3 align-items-center" style="background: linear-gradient(135deg, #213555, #7C93C3 );">
+      <article class="col-12 col-lg-6">
+        <h2 class="display-1 fw-bolder">Diskon Kelas</h2>
+        <p class="lead font-weight-bold text-light">Pilih kelas Grammar dan kelas TOEFL Preparation dapatkan <span class="text-danger fw-bold">diskon 20%</span></p>
+        <p class="mb-4 text-danger fs-3 fw-medium" id="limited-offer">Tawaran terbatas!</p>
+        <ul class="list-unstyled">
+          <li class="mb-2">
+            <i class="bi bi-check-circle-fill text-success"></i> Akses penuh ke semua materi
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-check-circle-fill text-success"></i> Forum diskusi dengan pengajar
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-check-circle-fill text-success"></i> Sertifikat penyelesaian
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-check-circle-fill text-success"></i> Update materi secara berkala
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-check-circle-fill text-success"></i> Bantuan 24/7 dari tim support
+          </li>
+        </ul>
+        <a href="#" class="btn-daftar btn bg-light1 fs-5 border-0 fw-bold rounded-5 color-dark" style="border-radius: 50px;">Daftar Sekarang →</a>
+      </article>
+        <div class="col-12 col-lg-5 text-center">
+          <p class="fs-3 ">Diskon berakhir dalam:</p>
+          <div id="countdown" class="display-1 text-center"> <p></p></div>
+        </div>
+    </div>
+  </section>
+   <!-- Discount End -->
+  
+  <!-- Our Mentors -->
+  <section id="mentors" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-5">Meet Our <span class="color-medium-dark">Mentors</span></h2>
+      <div class="row">
+        <!-- Mentor 1 -->
+        {% for mentor in mentors %}
+        <article class="col-lg-4 col-md-6 mb-4">
+          <div class="card text-center shadow-sm card-mentor">
+            <div class="overflow-hidden">
+             <img src="{%static 'images/'%}{{mentor.image_mentor}}" class="card-img-top" alt="{{mentor.nama}}">
+            </div>
+            <div class="card-body">
+              <h4 class="card-title">{{mentor.nama}}</h4>
+              <p class="card-text">{{mentor.jabatan}}</p>
+              <div>
+                <a href="{{mentor.linkYt}}" class="bi bi-youtube fs-3 text-danger p-2"></a>
+                <a href="{{mentor.linkIg}}" class="bi bi-instagram fs-3 text-danger p-2"></a>
+                <a href="{{mentor.linkFb}}" class="bi bi-facebook fs-3 text-primary p-2"></a>
+              </div>
+            </div>
+         </div>
+        </article>
+    {%endfor%}
+      </div>
+    </div>
+  </section>
+  
+  <!-- Our Mentors end -->
+  
+  <section id="carouselExampleIndicators" class="carousel carousel-dark slide d-block bg-light1 py-5">
+    <h2 class="text-center fw-bold mt-5">What Our <span class="color-medium-dark">Customer Says</span></h2>
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    
+    <div class="carousel-inner p-5 mb-4">
+      <!-- halaman pertama testimoni -->
+      <section class="carousel-item active">
+        <div class="row">
+           <!-- Card 1 -->
+           <div class="col-md-4 ">
+            <div class="testimonial-card px-3">
+              <div class="card shadow-sm p-5">
+              <i class="bi bi-quote fs-1 text-dark mb-3"></i>
+              <h5>Super cool!</h5>
+              <p>Lorem ipsum praesent ac massa at ligula reet est iaculis. Vivamus est mist aliquet elit ac nisl.</p>
+              <div class="stars mb-3 text-warning"">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+              </div>
+              <div class="d-flex gap-3">
+                <img src="{%static 'images/mentor1.jpg'%}" alt="Matt Zhang" class="object-fit-cover rounded-circle mt-1" width="70px" height="70px" alt="Nichole">
+                <div>
+                  <p>Matt Zhang</p>
+                  <small>CEO at Borcelle</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+  
+  
+          <!-- Card 2 -->
+          <div class="col-md-4 ">
+            <div class="testimonial-card px-3">
+              <div class="card shadow-sm  p-5">
+              <i class="bi bi-quote fs-1 text-dark mb-3"></i>
+              <h5>Super cool!</h5>
+              <p>Lorem ipsum praesent ac massa at ligula reet est iaculis. Vivamus est mist aliquet elit ac nisl.</p>
+              <div class="stars mb-3 text-warning"">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+              </div>
+              <div class="d-flex gap-3 ">
+                <img src="{%static 'images/mentor2.jpg'%}" alt="Matt Zhang" class="object-fit-cover rounded-circle mt-1" width="70px" height="70px" alt="Nichole">
+                <div>
+                  <p>Matt Zhang</p>
+                  <small>CEO at Borcelle</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+  
+  
+          <!-- Card 3 -->
+          <div class="col-md-4 ">
+            <div class="testimonial-card px-3">
+              <div class="card shadow-sm  p-5">
+              <i class="bi bi-quote fs-1 text-dark mb-3"></i>
+              <h5>Super cool!</h5>
+              <p>Lorem ipsum praesent ac massa at ligula reet est iaculis. Vivamus est mist aliquet elit ac nisl.</p>
+              <div class="stars mb-3 text-warning"">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+              </div>
+              <div class="d-flex gap-3">
+                <img src="{%static 'images/mentor3.jpg'%}" alt="Matt Zhang" class="object-fit-cover rounded-circle mt-1" width="70px" height="70px" alt="Nichole">
+                <div>
+                  <p>Matt Zhang</p>
+                  <small>CEO at Borcelle</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+  
+  
+        </div>
+      </section>
+  
+      <!-- halaman kedua testimoni -->
+      <section class="carousel-item">
+        <div class="row">
+          <!-- Card 1 -->
+          <div class="col-md-4 ">
+           <div class="testimonial-card px-3">
+             <div class="card  shadow-sm p-5">
+             <i class="bi bi-quote fs-1 text-dark mb-3"></i>
+             <h5>Super cool!</h5>
+             <p>Lorem ipsum praesent ac massa at ligula reet est iaculis. Vivamus est mist aliquet elit ac nisl.</p>
+             <div class="stars mb-3 text-warning"">
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+             </div>
+             <div class="d-flex gap-3">
+               <img src="{%static 'images/mentor1.jpg'%}" alt="Matt Zhang" class="object-fit-cover rounded-circle mt-1" width="70px" height="70px" alt="Nichole">
+               <div>
+                 <p>Matt Zhang</p>
+                 <small>CEO at Borcelle</small>
+               </div>
+             </div>
+           </div>
+         </div>
+         </div>
+  
+  
+         <!-- Card 2 -->
+         <div class="col-md-4 ">
+           <div class="testimonial-card px-3">
+             <div class="card shadow-sm  p-5">
+             <i class="bi bi-quote fs-1 text-dark mb-3"></i>
+             <h5>Super cool!</h5>
+             <p>Lorem ipsum praesent ac massa at ligula reet est iaculis. Vivamus est mist aliquet elit ac nisl.</p>
+             <div class="stars mb-3 text-warning"">
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-half"></i>
+             </div>
+             <div class="d-flex gap-3">
+               <img src="{%static 'images/mentor4.jpeg'%}" alt="Matt Zhang" class="object-fit-cover rounded-circle mt-1" width="70px" height="70px" alt="Nichole">
+               <div>
+                 <p>Matt Zhang</p>
+                 <small>CEO at Borcelle</small>
+               </div>
+             </div>
+           </div>
+         </div>
+         </div>
+  
+  
+         <!-- Card 3 -->
+         <div class="col-md-4 ">
+           <div class="testimonial-card px-3">
+             <div class="card shadow-sm  p-5">
+             <i class="bi bi-quote fs-1 text-dark mb-3"></i>
+             <h5>Super cool!</h5>
+             <p>Lorem ipsum praesent ac massa at ligula reet est iaculis. Vivamus est mist aliquet elit ac nisl.</p>
+             <div class="stars mb-3 text-warning"">
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star"></i>
+             </div>
+             <div class="d-flex gap-3">
+               <img src="{%static 'images/mentor5.jpeg'%}" alt="Matt Zhang" class="object-fit-cover rounded-circle mt-1" width="70px" height="70px" alt="Nichole">
+               <div>
+                 <p>Matt Zhang</p>
+                 <small>CEO at Borcelle</small>
+               </div>
+             </div>
+           </div>
+         </div>
+         </div>
+  
+  
+       </div>
+      </section>
+  
+      <!-- halaman ketiga testimoni -->
+      <section class="carousel-item">
+        <div class="row">
+          <!-- Card 1 -->
+          <div class="col-md-4 ">
+           <div class="testimonial-card px-3">
+             <div class="card  shadow-sm p-5">
+             <i class="bi bi-quote fs-1 text-dark mb-3"></i>
+             <h5>Super cool!</h5>
+             <p>Lorem ipsum praesent ac massa at ligula reet est iaculis. Vivamus est mist aliquet elit ac nisl.</p>
+             <div class="stars mb-3 text-warning">
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+             </div>
+             <div class="d-flex gap-3">
+               <img src="{%static 'images/mentor4.jpeg'%}" alt="Matt Zhang" class="object-fit-cover rounded-circle mt-1" width="70px" height="70px" alt="Nichole">
+               <div>
+                 <p>Matt Zhang</p>
+                 <small>CEO at Borcelle</small>
+               </div>
+             </div>
+           </div>
+         </div>
+         </div>
+  
+  
+         <!-- Card 2 -->
+         <div class="col-md-4 ">
+           <div class="testimonial-card px-3">
+             <div class="card shadow-sm  p-5">
+             <i class="bi bi-quote fs-1 text-dark mb-3"></i>
+             <h5>Super cool!</h5>
+             <p>Lorem ipsum praesent ac massa at ligula reet est iaculis. Vivamus est mist aliquet elit ac nisl.</p>
+             <div class="stars mb-3 text-warning"">
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+             </div>
+             <div class="d-flex gap-3">
+               <img src="{%static 'images/mentor1.jpg'%}" alt="Matt Zhang" class="object-fit-cover rounded-circle mt-1" width="70px" height="70px" alt="Nichole">
+               <div>
+                 <p>Matt Zhang</p>
+                 <small>CEO at Borcelle</small>
+               </div>
+             </div>
+           </div>
+         </div>
+         </div>
+  
+  
+         <!-- Card 3 -->
+         <div class="col-md-4 ">
+           <div class="testimonial-card px-3">
+             <div class="card shadow-sm  p-5">
+             <i class="bi bi-quote fs-1 text-dark mb-3"></i>
+             <h5>Super cool!</h5>
+             <p>Lorem ipsum praesent ac massa at ligula reet est iaculis. Vivamus est mist aliquet elit ac nisl.</p>
+             <div class="stars mb-3 text-warning"">
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+               <i class="bi bi-star-fill"></i>
+             </div>
+             <div class="d-flex gap-3">
+               <img src="{%static 'images/mentor2.jpg'%}" alt="Matt Zhang" class="object-fit-cover rounded-circle mt-1" width="70px" height="70px" alt="Nichole">
+               <div>
+                 <p>Matt Zhang</p>
+                 <small>CEO at Borcelle</small>
+               </div>
+             </div>
+           </div>
+         </div>
+         </div>
+       </div>
+      </section>
+    </div>
+  </section>
+{%endblock content%}
+
+{%block js%}
+  <script src="{%static 'js/home.js'%}"></script>
+{%endblock js%}
+

@@ -1,0 +1,132 @@
+body{
+    background-color: #fff;
+}
+
+.text-justify{
+    text-align: justify;
+}
+
+.bg-dark1{
+    background-color: #213555;
+}
+
+.bg-medium-dark{
+    background-color: #7C93C3;
+}
+
+.bg-medium-dark2{
+    background-color: #4f709c;
+}
+
+.bg-medium-light{
+    background-color: #d8c4b6;
+}
+
+.bg-snow{
+    background-color: #DFF5FF;
+}
+
+.bg-light1 {
+    background-color: #f5efe7;
+}
+
+.color-dark {
+    color: #213555;
+}
+
+.color-medium-light {
+    color: #d8c4b6;
+}
+
+.color-light {
+    color: #f5efe7;
+}
+.color-medium-dark {
+  color: #4f709c;
+}
+
+.btn-hover:hover {
+    background-color: #213555 ;
+    color: #f5efe7 ;
+}
+
+/* Footer */
+footer {
+    background-color: #7c93c3;
+    color: #ffffff;
+    padding: 30px 0;
+    font-size: 18px;
+
+  }
+
+  .footer p {
+    margin-bottom: 0;
+    line-height: 1.5;
+  }
+
+  /* Link Styling */
+
+  .footer h5,p {
+    color: #213555 !important;
+  }
+  .footer a {
+    text-decoration: none;
+  }
+
+  .footer a:hover {
+    text-decoration: none;
+    color: #f4f4f4;
+  }
+
+  .footer .footer-column ul li a {
+    color: #213555 !important;
+  }
+
+  .footer .footer-column ul li a:hover {
+    color:  white !important;
+  }
+
+  /* Social Media Icon Hover Effect */
+  .social-links i {
+    transition: transform 0.3s ease;
+  }
+
+  .social-links i:hover {
+    transform: scale(1.2);
+  }
+
+  /* Flexbox Adjustments for Footer */
+  .footer-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+  }
+
+  .footer-column {
+    margin-bottom: 2rem;
+  }
+
+  #hover-pilih-kelas{
+    transition: all 0.3s ease;
+  }
+  #hover-pilih-kelas:hover {
+    transform: scale(1.02);
+  }
+  #hover-pilih-kelas:hover img {
+    transform: scale(1.1);
+    transition: 0.5s ease;
+  }
+  .card-mentor{
+    transition: 0.3s ease;
+  }
+  .card-mentor:hover img {
+    transform: scale(1.05);
+    transition: 0.5s ease;
+  }
+  .card-mentor:hover{
+    transform: scale(1.03);
+    transition: 0.5s ease;
+  }
+  
+  
+

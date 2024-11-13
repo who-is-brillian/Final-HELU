@@ -1,0 +1,228 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block head%}
+<link rel="stylesheet" href="{%static 'css/about.css'%}">
+{%endblock head%}
+{%block title%} {{title}} {%endblock title%}
+
+{%block content%}
+  <section class="parallax bg-medium-dark " style="background-image: url('{{bannerClass}}')";>
+      <div class="parallax-item position-fixed">
+          <h1 class="typing-effect1"></h1>
+      </div>
+  </section>
+
+  <main class="z-2 position-relative">
+    <!-- About Us Start -->
+    <section class="container bg-snow p-5 my-5 rounded-5">
+        <!-- About Helu -->
+    <section class="mt-5" >
+        <h1 class="text-center my-5 fw-bolder color-medium-dark">About <span class="color-dark">HELU</span></h1>
+        <div id="aboutSection" class="row d-flex justify-content-center align-items-center" >
+            <div class="col-12 col-md-10 col-lg-5">
+                <img src="{%static 'images/AboutDummy.jpg'%}" id="logoAbout" class="img-fluid" alt="Logo Helu">
+            </div>
+            <div class="article-about col-12 col-md-12 col-lg-6">
+                <div
+                    id="aboutCard" class=" card-body d-flex flex-column align-items-centercolor-dark">
+                    <p class="lh-sm text-justify fs-6">
+                        <strong>HELU (Helping Education)</strong> adalah platform pembelajaran bahasa Inggris untuk
+                        siswa SMA/SMK
+                        yang
+                        menggunakan pendekatan design thinking. Platform ini dirancang untuk mempersiapkan siswa
+                        menghadapi ujian masuk perguruan tinggi melalui metode belajar yang interaktif dan relevan
+                        dengan kehidupan sehari-hari, memastikan pengalaman belajar yang menyenangkan dan efektif.
+                    </p>
+                    <p class="lh-sm text-justify fs-6">
+                        <strong>HELU</strong> menawarkan materi interaktif berbasis video, latihan soal, dan forum
+                        diskusi untuk
+                        membantu
+                        siswa lebih mudah memahami materi. Video pembelajaran menarik, latihan soal mendalam, serta
+                        forum untuk bertukar pikiran memberikan pengalaman belajar yang lebih menyeluruh, menjaga
+                        motivasi siswa dalam belajar.
+                    </p>
+                    <p class="lh-sm text-justify fs-6">
+                        <strong>HELU</strong> juga bekerja sama dengan penerbit, pembuat konten, dan institusi
+                        pendidikan untuk
+                        memastikan materi yang disajikan selalu berkualitas tinggi dan relevan dengan kebutuhan
+                        siswa.
+                        Dengan kolaborasi ini, <strong>HELU</strong> berkomitmen menyediakan solusi pembelajaran yang
+                        efektif dan
+                        mendukung kesuksesan akademik siswa.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Visi misi -->
+    <section class="my-5 d-flex flex-column gap-5">
+        <!-- Visi -->
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <section class="custom-box bg-dark1 text-center p-3 rounded-top color-medium-light"> 
+                    <h2> Visi HELU </h2> 
+                </section>
+                <article id="visiHelu" class="custom-box px-2 py-5 rounded-bottom-3 bg-medium-dark color-dark mt-2  fs-6">
+                    <p>Menjadi platform pembelajaran bahasa Inggris terdepan yang inovatif dan inklusif, membantu siswa
+                        SMA/SMK mengembangkan keterampilan bahasa Inggris secara efektif, serta mempersiapkan mereka
+                        untuk
+                        menghadapi tantangan akademik dan dunia global.
+                    </p>
+                </article>
+            </div>
+            <div class="col-lg-6">
+                <img src="{%static 'images/people.png'%}" alt="imageVector" class="img-visi-misi img-fluid">
+            </div>
+        </div>
+        <!-- Misi -->
+        <div>
+            <section class="custom-box bg-dark1 text-center p-3 rounded-top color-medium-light"> 
+                <h2> Misi HELU</h2> 
+            </section>
+            <article id="misiHelu" class="custom-box bg-medium-dark color-dark p-4 rounded-bottom-3 mt-2 fs-6">
+                <ul>
+                    <li>Menyediakan pembelajaran bahasa Inggris berkualitas tinggi dengan pendekatan design thinking
+                        yang interaktif dan relevan.</li>
+                    <li>Meningkatkan motivasi belajar siswa melalui konten edukatif berbasis video, latihan soal,
+                        dan diskusi yang menyenangkan dan mudah diakses.</li>
+                    <li>Membantu siswa SMA/SMK dalam mempersiapkan diri untuk ujian masuk perguruan tinggi dengan
+                        materi yang disesuaikan dengan kurikulum dan kebutuhan akademik mereka.</li>
+                    <li>Berkolaborasi dengan penerbit, pembuat konten, dan institusi pendidikan untuk menyediakan
+                        materi pembelajaran yang up-to-date dan berkualitas.</li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <!-- Crousel OurTeam -->
+    <section id="carouselExampleRide" class="carousel slide" data-bs-ride="carousel" >
+        <h1 class="text-center my-5 fw-bolder color-medium-dark">Our<span class="color-dark">Team</span></h1>
+        <div class="carousel-inner ">
+            <div class="carousel-item active">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 d-flex justify-content-center align-items-center mb-4">
+                        <div class="text-center">
+                            <img src="{%static 'images/alwan.jpg'%}" alt="Alwan Rofiqi" class="img-fluid w-50 rounded-circle">
+                            <p class="fw-semibold fs-5">Alwan Rofiqi</p>
+                            <p class="fs-6">Universitas Negeri Surabaya</p>
+                            <div class="socialMedia">
+                                <i><a href="#" class="bi bi-facebook fs-2"></a></i>
+                                <i><a href="#" class="bi bi-instagram text-danger fs-2"></a></i>
+                                <i><a href="#" class="bi bi-linkedin fs-2"></a></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 d-flex justify-content-center align-items-center mb-4">
+                        <div class="text-center">
+                            <img src="{%static 'images/salsa.jpg'%}" alt="Salsa Nurul Laeli" class="img-fluid w-50 rounded-circle">
+                            <p class="fw-semibold fs-5">Salsa Nurul Laeli</p>
+                            <p class="fs-6">Universitas Mercu Buana Jakarta</p>
+                            <div class="socialMedia">
+                                <i><a href="#" class="bi bi-facebook fs-2"></a></i>
+                                <i><a href="#" class="bi bi-instagram text-danger fs-2"></a></i>
+                                <i><a href="#" class="bi bi-linkedin fs-2"></a></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 d-flex justify-content-center align-items-center mb-4">
+                        <div class="text-center">
+                            <img src="{%static 'images/nanda.jpg'%}" alt="Nanda Pramudya Lestari" class="img-fluid w-50 rounded-circle">
+                            <p class="fw-semibold fs-5">Nanda Pramudya Lestari</p>
+                            <p class="fs-6">STMIK Sinar Nusantara</p>
+                            <div class="socialMedia">
+                                <i><a href="#" class="bi bi-facebook fs-2"></a></i>
+                                <i><a href="#" class="bi bi-instagram text-danger fs-2"></a></i>
+                                <i><a href="#" class="bi bi-linkedin fs-2"></a></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 d-flex justify-content-center align-items-center mb-4">
+                        <div class="text-center">
+                            <img src="{%static 'images/bili.jpg'%}" alt="Muhammad Brillian Mujahid Kamal" class="img-fluid w-50 rounded-circle">
+                            <p class="fw-semibold fs-5">M Brillian Mujahid Kamal</p>
+                            <p class="fs-6">Politeknik Semen Indonesia</p>
+                            <div class="socialMedia">
+                                <i><a href="#" class="bi bi-facebook fs-2"></a></i>
+                                <i><a href="#" class="bi bi-instagram text-danger fs-2"></a></i>
+                                <i><a href="#" class="bi bi-linkedin fs-2"></a></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 d-flex justify-content-center align-items-center mb-4">
+                        <div class="text-center">
+                            <img src="{%static 'images/reka.jpg'%}" alt="Ervin Reka Abadi" class="img-fluid w-50 rounded-circle">
+                            <p class="fw-semibold fs-5">Ervin Reka Abadi</p>
+                            <p class="fs-6">Universitas Amikom Yogyakarta</p>
+                            <div class="socialMedia">
+                                <i><a href="#" class="bi bi-facebook fs-2"></a></i>
+                                <i><a href="#" class="bi bi-instagram text-danger fs-2"></a></i>
+                                <i><a href="#" class="bi bi-linkedin fs-2"></a></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 d-flex justify-content-center align-items-center mb-4">
+                        <div class="text-center">
+                            <img src="{%static 'images/Yusie.JPG'%}" alt="Yussie Nur Chusnul Khotimah" class="img-fluid w-50 rounded-circle">
+                            <p class="fw-semibold fs-5">Yussie Nur Chusnul Khotimah</p>
+                            <p class="fs-6">Universitas Palangkara</p>
+                            <div class="socialMedia">
+                                <i><a href="#" class="bi bi-facebook fs-2"></a></i>
+                                <i><a href="#" class="bi bi-instagram text-danger fs-2"></a></i>
+                                <i><a href="#" class="bi bi-linkedin fs-2"></a></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 d-flex justify-content-center align-items-center mb-4">
+                        <div class="text-center">
+                            <img src="{%static 'images/Volta.jpg'%}" alt="Volta Kelik Setiawan" class="img-fluid w-50 rounded-circle">
+                            <p class="fw-semibold fs-5">Volta Kelik Setiawan</p>
+                            <p class="fs-6">Universitas Mulawarman</p>
+                            <div class="socialMedia">
+                                <i><a href="#" class="bi bi-facebook fs-2"></a></i>
+                                <i><a href="#" class="bi bi-instagram text-danger fs-2"></a></i>
+                                <i><a href="#" class="bi bi-linkedin fs-2"></a></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 d-flex justify-content-center align-items-center mb-4">
+                        <div class="text-center">
+                            <img src="{%static 'images/ocha.jpg'%}" alt="Salshabila Adi Putri" class="img-fluid w-50 rounded-circle">
+                            <p class="fw-semibold fs-5">Salshabila Adi Putri</p>
+                            <p class="fs-6">Universitas Malikussaleh</p>
+                            <div class="socialMedia">
+                                <i><a href="#" class="bi bi-facebook fs-2"></a></i>
+                                <i><a href="#" class="bi bi-instagram text-danger fs-2"></a></i>
+                                <i><a href="#" class="bi bi-linkedin fs-2"></a></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <button class="carousel-control-prev bg-medium-dark rounded-5 m-auto" type="button"
+                style="height: 40px; width: 40px;" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next bg-medium-dark rounded-5 m-auto" style="height: 40px; width: 40px;"
+                type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+                <span class="carousel-control-next-icon  " aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+</section>
+    <!-- About Us End -->
+
+{%endblock content%}
+</main>
+  

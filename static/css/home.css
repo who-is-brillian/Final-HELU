@@ -1,0 +1,95 @@
+.bounce {
+    animation: smoothBounceIn 1.2s ease-out; /* Longer duration and easing */
+    opacity: 1; /* Make it visible */
+    }
+        /* Smooth bounce animation */
+    @keyframes smoothBounceIn {
+    0% {
+        transform: translateY(-150px); /* Reduced initial height for smoothness */
+        opacity: 0;
+    }
+    60% {
+        transform: translateY(15px); /* Smooth small bounce effect */
+        opacity: 1;
+    }
+    80% {
+        transform: translateY(-5px); /* Gentle bounce up */
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    }
+   
+   .counter{
+    width: 200px;
+    }
+
+    .bg-dark {
+    background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .shadow {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .parallax {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 70% 25%;
+    height: 500px;
+    background-attachment: fixed;
+    }
+    .container-carousel{
+    height: 500px;
+    }
+
+@media only screen and (max-width: 1200px) {
+    .counter{
+    width: 150px;
+    }
+    .parallax{
+    height: 200px;
+    background-position: 70% 8%;
+    height: 420px;
+    }
+    .carousel-inner{
+    height: 450px;
+    }
+    .container-carousel{
+    height: 300px;
+    }
+    .footer-column {
+    flex-direction: column;
+    }
+    .logo img {
+    width: 50%;
+    
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .nav-text{
+    display: none
+    }
+    .parallax {
+    height: 100px;
+    background-attachment: fixed;
+    background-position: 70% 15%;
+    height: 200px;
+    }
+    .counter{
+    width: 100px;
+    }
+    .carousel-inner{
+    height: 250px;
+    }
+    .card-student{
+    width: 60%;
+    height: 25%;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 80%;
+    }
+}
+

@@ -1,0 +1,78 @@
+.parallax {
+    background-image: url('img/About Us.png'); /* URL gambar latar belakang */
+    height: 65vh;
+    background-attachment: fixed;
+    background-position: 70% 25%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+    justify-content: center; /* Memusatkan secara horizontal */
+    align-items: center; /* Memusatkan secara vertikal */
+    position: relative; /* Dibutuhkan untuk penggunaan z-index */
+}
+
+.parallax-item {
+    position: absolute; /* Untuk mengatur posisi bebas dalam parallax */
+    top: 37%;
+    left: 30%;
+    transform: translateY(-50%); /* Memastikan elemen tetap di tengah vertikal */
+    z-index: 1; /* Menyebabkan teks ini berada di belakang next-section */
+}
+
+.parallax-item h1 {
+    color: white; /* Warna teks */
+    font-size: 4.5em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    padding: 10px; /* Memberikan padding agar teks tidak terlalu menempel */
+    z-index: inherit; /* Menggunakan z-index dari parent (parallax-item) */
+}
+            
+
+    
+@media only screen and (max-width: 1200px) {
+.parallax {
+    height: 50vh;  
+    background-position: 70% 20%;
+    background-size: contain;
+}
+.parallax-item {
+    position: absolute; /* Untuk mengatur posisi bebas dalam parallax */
+    top: 25%;
+    left: 30%;
+    transform: translateY(-50%); /* Memastikan elemen tetap di tengah vertikal */
+    z-index: 1; /* Menyebabkan teks ini berada di belakang next-section */
+}
+.parallax-item h1{
+    font-size: 3em;
+}
+.img-visi-misi {
+    display: block;
+    width: 50%;
+    margin: auto;
+}
+#aboutSection{
+    flex-direction: column;
+}
+#aboutSection .article-about{
+    margin-top: 20px;
+}
+}
+
+@media only screen and (max-width: 600px) {
+.parallax {
+    height: 40vh; /* Atur ulang ketinggian untuk layar kecil */
+    background-attachment: fixed;                
+    background-position: 70% 22%;
+}
+.parallax-item h1{
+    font-size: 1.5em;
+}
+.nav-text {
+    display: none;
+}
+.img-visi-misi {
+    display: none;
+}
+}
+

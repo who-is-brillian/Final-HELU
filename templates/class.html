@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block head%}
+<link rel="stylesheet" href="{%static 'css/class.css'%}">
+{%endblock head%}
+{%block title%} {{title}} {%endblock title%}
+
+{%block content%}
+  <section class="parallax bg-medium-dark " style="background-image: url('{{bannerClass}}')";>
+      <div class="parallax-item position-fixed">
+          <h1 class="typing-effect2"></h1>
+      </div>
+  </section>
+  
+  <main class="position-relative z-2">
+      <!-- Class -->
+  <section id="classes" class="py-5 bg-light ">
+    <div class="container mt-5">
+      <h2 class="text-center fw-bold mb-5 color-dark">Our <span class="color-medium-dark">Classes</span></h2>
+      <div class="row ">
+        {% for classpages in classes %}
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100 text-center" id="hover-pilih-kelas">
+                <div class="overflow-hidden">
+                    <img src="{% static 'images/' %}{{ classpages.image_url }}" class="card-img-top" alt="{{ class.title }}">
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">{{ classpages.title }}</h4>
+                    <h4 class="color-medium-dark fw-bold">Rp {{ classpages.price }}</h4>
+                    <ul class="list-unstyled text-start"> 
+                        <li><i class="bi bi-check-circle-fill"></i> Mulai {{ classpages.start_date }}</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Selama {{ classpages.duration }} ({{ classpages.sessions }}x pertemuan)</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Level: {{ classpages.level }}</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Jam belajar fleksibel</li>
+                    </ul>            
+                    <a href="#" class="no-hover btn bg-dark1 color-light btn-class-info">Info Selanjutnya</a>
+                </div>
+                <div class="card-footer text-muted">
+                    Pendaftaran ditutup kapan saja jika kuota sudah penuh
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{%endblock content%}
+</main>
+  
