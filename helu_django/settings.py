@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'classPage',
+    'contact',
+    'django_recaptcha',
     ]
 
 
@@ -131,3 +133,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+RECAPTCHA_PUBLIC_KEY = '6Ld2sX0qAAAAAOGOBcPZDgMZ7lxejkJQYX4nV1t-'
+RECAPTCHA_PRIVATE_KEY = '6Ld2sX0qAAAAABCvCNVRHtcnYTIaGLiDzdWTnB8O'
