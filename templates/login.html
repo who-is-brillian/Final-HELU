@@ -1,0 +1,33 @@
+<section class="d-flex align-items-center h-100" style="margin-top: 100px;">
+    <form class="mx-auto my-5 p-5 bg-light1 d-flex flex-column rounded-4" style="width: 400px; box-shadow: 2px; box-shadow: 20px 20px 50px grey;">
+        <img src="img/L1.png" alt="Logo Helu" class="w-50 mx-auto">
+        <h4 class="mx-auto py-2">Login to HELU</h4>
+        <div class="mb-4">
+            <input type="email" placeholder="Email Address" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required name="email">
+        </div>
+        <div class="mb-4 position-relative">
+            <input type="password" placeholder="Password" class="form-control" id="exampleInputPassword1" required>
+            <i class="bi bi-eye-slash position-absolute end-0 top-50 translate-middle-y pe-3" id="togglePassword" style="cursor: pointer;"></i>
+        </div>
+
+        <button type="submit" id="loginBtn" class="btn bg-medium-dark color-light btn-hover mb-3">Login</button>
+
+        <div class="text-center mb-3">
+            <span>or</span>
+        </div>
+
+        <div class="mb-3 d-grid">
+            <button type="button" class="btn btn-danger" id="googleLoginBtn">
+                <i class="bi bi-google"></i> Continue with Google
+            </button>
+        </div>
+
+        <div class="mb-3 d-grid">
+            <button type="button" class="btn btn-primary" id="facebookLoginBtn">
+                <i class="bi bi-facebook"></i> Continue with Facebook
+            </button>
+        </div>
+
+        <p class="mx-auto my-2">Don't have an account? <a href="signUp.html" class="text-decoration-none color-medium-dark">Sign up here</a></p>
+    </form>
+</section>

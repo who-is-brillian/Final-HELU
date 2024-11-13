@@ -49,6 +49,16 @@
             </section>
             <section class="row g-5">
                 <div class="col-lg-6">
+                    {% if messages %}
+                        <div>
+                            {% for message in messages %}
+                                <div class="alert alert-success">
+                                    {{ message }}
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                     <form method="POST" novalidate>
                         {% csrf_token %}
                         {{form.as_p}}
