@@ -1,24 +1,26 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from user.forms import UserForm
-
-from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth import authenticate, login as auth_login, logout
+from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+# Halaman index
 def index(request):
     return render(request, "index.html")
 
+# Halaman khusus untuk user yang sudah login
 @login_required
 def special(request):
     return HttpResponse("You are logged in, Nice!")
 
+# View untuk logout
 @login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse("index"))
 
+# View untuk registrasi
 def register(request):
     registered = False
 
@@ -26,8 +28,8 @@ def register(request):
         user_form = UserForm(data=request.POST)
 
         if user_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)  # Hash the password
+            user = user_form.save(commit=False)
+            user.set_password(user.password)  # Meng-hash password
             user.save()
 
             registered = True
@@ -45,16 +47,17 @@ def register(request):
         },
     )
 
-def login(request):
+# View untuk login
+def user_login(request):
     if request.method == "POST":
-        email = request.POST.get("email")  # Get from login.html
-        password = request.POST.get("password")  # Get from login.html
+        email = request.POST.get("email")  # Ambil dari form login.html
+        password = request.POST.get("password")  # Ambil dari form login.html
 
-        user = authenticate(email=email, password=password)
+        user = authenticate(request, email=email, password=password)
 
         if user:
             if user.is_active:
-                login(request, user)
+                auth_login(request, user)  # Gunakan auth_login dari django
                 return HttpResponseRedirect(reverse("index"))
             else:
                 return HttpResponse("Account not active")

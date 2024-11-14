@@ -7,5 +7,5 @@ app_name = 'user'
 
 urlpatterns = [
     path("signup/", views.register, name="register"),
-    path("login/", views.login, name="login"),
+    path("", views.user_login, name="user_login"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

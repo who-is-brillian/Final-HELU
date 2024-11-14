@@ -1,5 +1,7 @@
 from django.contrib import admin
-from user.models import UserProfileInfo
+from .models import UserProfileInfo
 
-# Register your models here.
-admin.site.register(UserProfileInfo)
+class UserProfileInfoAdmin(admin.ModelAdmin):
+    list_display = ('user', 'email', 'password')
+
+admin.site.register(UserProfileInfo, UserProfileInfoAdmin)

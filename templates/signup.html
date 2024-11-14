@@ -1,19 +1,81 @@
-{%extends 'base.html'%}
-{%load static%}
+{% extends 'base.html' %}
+{% load static %}
 
-{%block title%} {{title}} {%endblock title%}
+{% block title %}
+    Sign Up - HELU
+{% endblock title %}
 
-{%block content%}
+{% block content %}
 <section class="d-flex d-flex align-items-center h-100" style="margin-top: 100px;">
-    <form class="mx-auto my-5 p-5 bg-light1 d-flex flex-column rounded-4" style="width: 400px; box-shadow: 20px 20px 50px grey;" id="signupForm">
-        
-        <img src="img/L1.png" alt="Logo Helu" class="w-50 mx-auto">
+    <form method="POST" action="{% url 'user:register' %}" class="mx-auto my-5 p-5 bg-light1 d-flex flex-column rounded-4" style="width: 400px; box-shadow: 20px 20px 50px grey;" id="signupForm">
+        {% csrf_token %}
+        <img src="{% static 'img/L1.png' %}" alt="Logo Helu" class="w-50 mx-auto">
         <h4 class="mx-auto py-2">Sign Up to HELU</h4>
-        {% csrf_token %} {{ user_form.as_p }} 
+        
+        {% if registered %}
+        <div class="alert alert-success">
+            <strong>Success!</strong> You have successfully registered. You can now <a href="{% url 'user:user_login' %}">log in</a>.
+        </div>
+        {% elif user_form.errors %}
+        <div class="alert alert-danger">
+            <strong>Error!</strong> Please correct the errors below.
+        </div>
+        {% endif %}
+
+        <div class="mb-3">
+            <input type="text" name="username" placeholder="Full Name" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <input type="email" name="email" placeholder="Email Address" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <input type="text" name="username" placeholder="User Name" class="form-control" required>
+        </div>
+
+        <div class="mb-3 position-relative">
+            <input type="password" name="password" placeholder="Password" class="form-control" id="password" required>
+            <small class="text-muted">Password harus ada huruf besar, kecil, angka, & karakter khusus.</small>
+            <button type="button" class="btn btn-outline-secondary position-absolute top-0 end-0" id="togglePassword">
+                <i class="bi bi-eye" id="eyeIcon"></i>
+            </button>
+        </div>
+
+        <div class="mb-3 position-relative">
+            <input type="password" name="password2" placeholder="Confirm Password" class="form-control" id="confirmPassword" required>
+            <button type="button" class="btn btn-outline-secondary position-absolute top-0 end-0" id="toggleConfirmPassword">
+                <i class="bi bi-eye" id="confirmEyeIcon"></i>
+            </button>
+        </div>
+
         <button type="submit" class="btn bg-medium-dark color-light btn-hover">Sign Up</button>
-        <p class="mx-auto my-2"> Have an account? <a href="login.html" class="text-decoration-none color-medium-dark">Login here</a></p>
+        <p class="mx-auto my-2"> Have an account? <a href="{% url 'user:user_login' %}" class="text-decoration-none color-medium-dark">Login here</a></p>
     </form>
-    
 </section>
-{%endblock content%}
-{%block js%} {%endblock js%}
+
+{% endblock content %}
+
+{% block js %}
+<script>
+    // Toggle password visibility
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordField = document.getElementById('password');
+    
+    togglePassword.addEventListener('click', function (e) {
+        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordField.setAttribute('type', type);
+        this.classList.toggle('bi-eye');
+    });
+
+    // Toggle confirm password visibility
+    const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+    const confirmPasswordField = document.getElementById('confirmPassword');
+    
+    toggleConfirmPassword.addEventListener('click', function (e) {
+        const type = confirmPasswordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        confirmPasswordField.setAttribute('type', type);
+        this.classList.toggle('bi-eye');
+    });
+</script>
+{% endblock js %}
