@@ -1,3 +1,9 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block title%} {{title}} {%endblock title%}
+
+{%block content%}
 <section class="d-flex align-items-center h-100" style="margin-top: 100px;">
     <form class="mx-auto my-5 p-5 bg-light1 d-flex flex-column rounded-4" style="width: 400px; box-shadow: 2px; box-shadow: 20px 20px 50px grey;">
         <img src="img/L1.png" alt="Logo Helu" class="w-50 mx-auto">
@@ -31,3 +37,5 @@
         <p class="mx-auto my-2">Don't have an account? <a href="signUp.html" class="text-decoration-none color-medium-dark">Sign up here</a></p>
     </form>
 </section>
+{%endblock content%}
+{%block js%} {%endblock js%}

@@ -1,30 +1,19 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block title%} {{title}} {%endblock title%}
+
+{%block content%}
 <section class="d-flex d-flex align-items-center h-100" style="margin-top: 100px;">
     <form class="mx-auto my-5 p-5 bg-light1 d-flex flex-column rounded-4" style="width: 400px; box-shadow: 20px 20px 50px grey;" id="signupForm">
+        
         <img src="img/L1.png" alt="Logo Helu" class="w-50 mx-auto">
         <h4 class="mx-auto py-2">Sign Up to HELU</h4>
-        <div class="mb-3">
-            <input type="text" placeholder="Full Name" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <input type="email" placeholder="Email Address" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <input type="text" placeholder="User Name" class="form-control" required>
-        </div>
-        <div class="mb-3 position-relative">
-            <input type="password" placeholder="Password" class="form-control" id="password" required>
-            <small class="text-muted">Password harus ada huruf besar, kecil, angka, & karakter khusus.</small>
-            <button type="button" class="btn btn-outline-secondary position-absolute top-0 end-0" id="togglePassword">
-                <i class="bi bi-eye" id="eyeIcon"></i>
-            </button>
-        </div>
-        <div class="mb-3 position-relative">
-            <input type="password" placeholder="Confirm Password" class="form-control" id="confirmPassword" required>
-            <button type="button" class="btn btn-outline-secondary position-absolute top-0 end-0" id="toggleConfirmPassword">
-                <i class="bi bi-eye" id="confirmEyeIcon"></i>
-            </button>
-        </div>
+        {% csrf_token %} {{ user_form.as_p }} 
         <button type="submit" class="btn bg-medium-dark color-light btn-hover">Sign Up</button>
         <p class="mx-auto my-2"> Have an account? <a href="login.html" class="text-decoration-none color-medium-dark">Login here</a></p>
     </form>
+    
 </section>
+{%endblock content%}
+{%block js%} {%endblock js%}

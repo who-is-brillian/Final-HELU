@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'classPage',
     'contact',
     'django_recaptcha',
+    'user',
     ]
 
 
