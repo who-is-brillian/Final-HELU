@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Sign Up - HELU
+{% endblock title %}
+
+{% block content %}
+<section class="d-flex align-items-center h-100" style="margin-top: 100px;">
+    <div class="mx-auto my-5 p-5 bg-light1 d-flex flex-column rounded-4" style="width: 400px; box-shadow: 20px 20px 50px grey;">
+        {% if registered %}
+            <img src="{% static 'images/L1.png' %}" alt="Logo Helu" class="w-50 mx-auto">
+            <h4 class="mx-auto py-2">Sign Up to HELU</h4>
+            <div class="alert alert-success">
+                <strong>Success!</strong> You have successfully registered. You can now <a href="{% url 'user:user_login' %}">log in</a>.
+            </div>
+        {% else %}
+        <form enctype="multipart/form-data" method="POST" id="signupForm">
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <img src="{% static 'images/L1.png' %}" alt="Logo Helu" class="w-50 mx-auto">
+                <h4 class="mx-auto py-2">Sign Up to HELU</h4>
+            </div>
+            {% if user_form.errors or profile_form.errors %}
+            <div class="alert alert-danger">
+                <strong>Error!</strong> Please correct the errors below.
+            </div>
+            {% endif %}
+            
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ user_form.username}}
+            </div>
+
+            <div class="mb-3">
+                {{ user_form.email}}
+            </div>
+
+            <div class="mb-3 position-relative">
+                {{ user_form.password}}
+                <small class="text-muted">Password harus ada huruf besar, kecil, angka, & karakter khusus.</small>
+            </div>
+
+            <div class="mb-3 position-relative">
+                {{ user_form.confirm_password }}
+                <small class="text-muted">Konfirmasi password Anda.</small>
+            </div>
+
+            <div class="mb-3">
+                {{ profile_form.profile_pic}}
+            </div>
+
+            <button type="submit" class="btn bg-medium-dark color-light btn-hover w-100" >Sign Up</button>
+            <p class="mx-auto my-2"> Have an account? <a href="{% url 'user:user_login' %}" class="text-decoration-none color-medium-dark">Login here</a></p>
+        </form>
+        {% endif %}
+    </div>
+</section>
+{% endblock content %}

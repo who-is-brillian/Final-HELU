@@ -7,9 +7,8 @@
 
 {% block content %}
 <section class="d-flex align-items-center h-100" style="margin-top: 100px;">
-    <form method="POST" action="{% url 'user:user_login' %}" class="mx-auto my-5 p-5 bg-light1 d-flex flex-column rounded-4" style="width: 400px; box-shadow: 20px 20px 50px grey;">
-        {% csrf_token %}
-        <img src="{% static 'img/L1.png' %}" alt="Logo Helu" class="w-50 mx-auto">
+    <form method="post" action="{% url 'user:user_login' %}" class="mx-auto my-5 p-5 bg-light1 d-flex flex-column rounded-4" style="width: 400px; box-shadow: 20px 20px 50px grey;">
+        <img src="{% static 'images/L1.png' %}" alt="Logo Helu" class="w-50 mx-auto">
         <h4 class="mx-auto py-2">Login to HELU</h4>
         
         {% if form.errors %}
@@ -17,7 +16,14 @@
             <strong>Error!</strong> Please correct the errors below.
         </div>
         {% endif %}
-
+        {% if error_message %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error:</strong> {{ error_message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        
+        {%csrf_token%}
         <div class="mb-4">
             <input type="email" name="email" placeholder="Email Address" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
         </div>

@@ -15,7 +15,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+LOGIN_REDIRECT_URL = '/'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -91,12 +91,21 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+]
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {'min_length': 8},
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -137,3 +146,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 RECAPTCHA_PUBLIC_KEY = '6Ld2sX0qAAAAAOGOBcPZDgMZ7lxejkJQYX4nV1t-'
 RECAPTCHA_PRIVATE_KEY = '6Ld2sX0qAAAAABCvCNVRHtcnYTIaGLiDzdWTnB8O'
+
+AUTHENTICATION_BACKENDS = [
+    'user.authentication_backend.EmailAuthBackend',  # Ganti dengan path yang benar
+    'django.contrib.auth.backends.ModelBackend',  # Opsional, jika Anda ingin tetap menggunakan default
+]
+
+CSRF_FAILURE_VIEW = 'django.views.csrf.csrf_failure'

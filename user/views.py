@@ -1,69 +1,86 @@
 from django.shortcuts import render, redirect
-from user.forms import UserForm
-from django.contrib.auth import authenticate, login as auth_login, logout
-from django.http import HttpResponse
+from user.forms import UserForm, UserProfileInfoForm
+from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.backends import ModelBackend
 
-# Halaman index
+
+# index page
 def index(request):
     return render(request, "index.html")
 
-# Halaman khusus untuk user yang sudah login
+# Page when user is logged in
 @login_required
 def special(request):
     return HttpResponse("You are logged in, Nice!")
 
-# View untuk logout
+# Logout user
 @login_required
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect(reverse("index"))
+    return HttpResponseRedirect(reverse("home:index"))
 
-# View untuk registrasi
+@csrf_protect
 def register(request):
     registered = False
 
     if request.method == "POST":
         user_form = UserForm(data=request.POST)
+        profile_form = UserProfileInfoForm(data=request.POST)
 
-        if user_form.is_valid():
-            user = user_form.save(commit=False)
-            user.set_password(user.password)  # Meng-hash password
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)  # Hash the password
             user.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user  # OneToOne relationship
+
+            if "profile_pic" in request.FILES:
+                profile.profile_pic = request.FILES["profile_pic"]
+
+            profile.save()
 
             registered = True
         else:
-            print(user_form.errors)
+            print(user_form.errors, profile_form.errors)
     else:
         user_form = UserForm()
+        profile_form = UserProfileInfoForm()
 
     return render(
         request,
-        "signup.html",
+        "register.html",
         {
             "user_form": user_form,
+            "profile_form": profile_form,
             "registered": registered,
         },
     )
 
-# View untuk login
+# Login page
 def user_login(request):
-    if request.method == "POST":
-        email = request.POST.get("email")  # Ambil dari form login.html
-        password = request.POST.get("password")  # Ambil dari form login.html
+    error_message = None  # Inisialisasi variabel error_message
 
-        user = authenticate(request, email=email, password=password)
+    if request.method == "POST":
+        email = request.POST.get("email")  # Ambil email dari form
+        password = request.POST.get("password")  # Ambil password dari form
+
+        user = authenticate(request, username=email, password=password)
 
         if user:
             if user.is_active:
-                auth_login(request, user)  # Gunakan auth_login dari django
-                return HttpResponseRedirect(reverse("index"))
+                login(request, user)
+                return HttpResponseRedirect(reverse("home:index"))
             else:
-                return HttpResponse("Account not active")
+                error_message = "Account is not active."
         else:
-            print("Someone tried to login and failed")
-            print(f"email: {email} and password: {password}")
-            return HttpResponse("Invalid login details supplied!")
-    else:
-        return render(request, "login.html", {})
+            error_message = "Invalid login details. Please try again."
+    
+    # Kirim pesan error (jika ada) ke template
+    return render(request, "login.html", {"error_message": error_message})
+
+

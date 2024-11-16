@@ -13,37 +13,63 @@
     <title>{%block title%}{%endblock title%}</title>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg bg-medium-dark fixed-top px-3 py-2 border-bottom border-2 border-dark bounce ">
-    <div class="container-fluid">
-      <img src="{%static 'images/L1.png'%}" alt="Logo" width="70" class="d-inline-block align-text-top">
-      <h1 class="nav-text fs-4 fw-bolder color-dark">Helping Education</h1>
-      <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto ">
-          <li class="nav-item m-2 ">
-            <a class="nav-link active color-light" aria-current="page" href="{% url 'home:home' %}">Home</a>
-          </li>
-          <li class="nav-item m-2 ">
-            <a class="nav-link color-light " href="{% url 'classPage:class_page' %}">Class</a>
-          </li>
-          <li class="nav-item m-2 ">
-            <a class="nav-link color-light " href="{% url 'home:about' %}">About Us</a>
-          </li>
-          <li class="nav-item m-2 ">
-            <a class="nav-link color-light " href="{% url 'contact:contact' %}">Contact Us</a>
-          </li>
-          <li class="nav-item m-2">
-            <a class="btn-signIn btn bg-light1 border-0 rounded-5 color-dark" href="{% url 'user:user_login' %}">Sign In</a>
-          </li>
-          <li class="nav-item m-2 ">
-            <a class="btn-signUp btn bg-dark1 border-0 rounded-5 color-medium-light" href="{% url 'user:register' %}">Sign Up</a>
-          </li>
-        </ul>
+  <nav class="navbar navbar-expand-lg bg-medium-dark fixed-top px-3 py-2 border-bottom border-2 border-dark bounce">
+      <div class="container-fluid">
+          <!-- Logo dan Judul -->
+          <img src="{% static 'images/L1.png' %}" alt="Logo" width="70" class="d-inline-block align-text-top">
+          <h1 class="nav-text fs-4 fw-bolder color-dark">Helping Education</h1>
+    
+          <!-- Toggle Button untuk Mobile -->
+          <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <!-- Konten Navbar -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto">
+                  <!-- Navigasi Halaman -->
+                  <li class="nav-item m-2">
+                      <a class="nav-link active color-light" aria-current="page" href="{% url 'home:index' %}">Home</a>
+                  </li>
+                  <li class="nav-item m-2">
+                      <a class="nav-link color-light" href="{% url 'classPage:class_page' %}">Class</a>
+                  </li>
+                  <li class="nav-item m-2">
+                      <a class="nav-link color-light" href="{% url 'home:about' %}">About Us</a>
+                  </li>
+                  <li class="nav-item m-2">
+                      <a class="nav-link color-light" href="{% url 'contact:contact' %}">Contact Us</a>
+                  </li>
+    
+                  <!-- Tombol Login/Sign Up atau Profil User -->
+                  {% if user.is_authenticated %}
+                  <!-- Jika user sudah login -->
+                  <li class="nav-item dropdown ">
+                      <a class="nav-link dropdown-toggle d-flex align-items-center color-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          <!-- Gambar Profil -->
+                          <img src="{{ user.userprofileinfo.profile_pic.url }}" alt="Profile Picture" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                          <!-- Nama User -->
+                          <span class="ms-2">{{ user.username }}</span>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="#">My Profile</a></li>
+                          <li><a class="dropdown-item" href="{% url 'user:user_logout' %}">Logout</a></li>
+                      </ul>
+                  </li>
+                  {% else %}
+                  <!-- Jika user belum login -->
+                  <li class="nav-item m-2">
+                      <a class="btn-signIn btn btn-md bg-light1 border-0 rounded-5 color-dark" href="{% url 'user:user_login' %}">Sign In</a>
+                  </li>
+                  <li class="nav-item m-2">
+                      <a class="btn-signUp btn btn-md bg-dark1 border-0 rounded-5 color-medium-light" href="{% url 'user:register' %}">Sign Up</a>
+                  </li>
+                  {% endif %}
+              </ul>
+          </div>
       </div>
-    </div>
   </nav>
+  
     {%block content%}
 
     {%endblock content%}
@@ -72,7 +98,7 @@
           </header>
           <article>
           <ul class="list-unstyled">
-            <li><a href="{% url 'home:home' %}">Home</a></li>
+            <li><a href="{% url 'home:index' %}">Home</a></li>
             <li><a href="{% url 'classPage:class_page' %}">Class</a></li>
             <li><a href="{% url 'home:about' %}">About</a></li>
             <li><a href="{% url 'home:about' %}">Contact Us</a></li>
