@@ -33,8 +33,14 @@
                         <li><i class="bi bi-check-circle-fill"></i> Selama {{ classpages.duration }} ({{ classpages.sessions }}x pertemuan)</li>
                         <li><i class="bi bi-check-circle-fill"></i> Level: {{ classpages.level }}</li>
                         <li><i class="bi bi-check-circle-fill"></i> Jam belajar fleksibel</li>
-                    </ul>            
-                    <a href="#" class="no-hover btn bg-dark1 color-light btn-class-info">Info Selanjutnya</a>
+                    </ul>
+                
+                    {% if classpage.link_page %}
+                    <a href="{% url 'classPage:' classpage.link_page %}" class="no-hover btn bg-dark1 color-light btn-class-info">Info Selanjutnya</a>
+                {% else %}
+                    <p>Link tidak tersedia</p>
+                {% endif %}            
+                    
                 </div>
                 <div class="card-footer text-muted">
                     Pendaftaran ditutup kapan saja jika kuota sudah penuh

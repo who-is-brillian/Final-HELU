@@ -6,4 +6,5 @@ from django.conf.urls.static import static
 app_name = 'classPage' 
 urlpatterns = [
     path ('', views.class_page, name='class_page'),
+    path ('grammar/', views.grammar, name='grammar'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

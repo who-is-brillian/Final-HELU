@@ -15,3 +15,6 @@ def class_page(request):
         'classes': classpages,
         }
     return render (request,'class.html', context)
+
+def grammar(request):
+    return render (request,'class_pages/grammar.html')
