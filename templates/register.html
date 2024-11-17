@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{%block head%}
+<link rel="stylesheet" href="{%static 'css/register.css'%}">
+{%endblock head%}
+
 {% block title %}
     Sign Up - HELU
 {% endblock title %}
@@ -35,15 +39,26 @@
                 {{ user_form.email}}
             </div>
 
-            <div class="mb-3 position-relative">
-                {{ user_form.password}}
+            <div class="mb-3">
+                <div class="input-group position-relative">
+                    {{ user_form.password }}
+                    <button type="button" class="btn btn-outline-secondary position-absolute end-0 top-50 translate-middle-y toggle-password" style="z-index: 10; border-left: none;">
+                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                    </button>
+                </div>
                 <small class="text-muted">Password harus ada huruf besar, kecil, angka, & karakter khusus.</small>
             </div>
-
-            <div class="mb-3 position-relative">
-                {{ user_form.confirm_password }}
-                <small class="text-muted">Konfirmasi password Anda.</small>
-            </div>
+            
+            
+            <div class="mb-3">
+                <div class="input-group position-relative">
+                    {{ user_form.confirm_password }}
+                    <button type="button" class="btn btn-outline-secondary position-absolute end-0 top-50 translate-middle-y toggle-password" style="z-index: 10; border-left: none;">
+                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <small class="text-muted">Password harus ada huruf besar, kecil, angka, & karakter khusus.</small>
+            </div>        
 
             <div class="mb-3">
                 {{ profile_form.profile_pic}}
@@ -56,3 +71,28 @@
     </div>
 </section>
 {% endblock content %}
+
+{% block js %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const togglePasswordButtons = document.querySelectorAll(".toggle-password");
+
+        togglePasswordButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                const input = this.parentElement.querySelector("input"); // Ambil input di dalam parent div
+                const icon = this.querySelector("i");
+                
+                if (input.type === "password") {
+                    input.type = "text";
+                    icon.classList.remove("fa-eye-slash");
+                    icon.classList.add("fa-eye");
+                } else {
+                    input.type = "password";
+                    icon.classList.remove("fa-eye");
+                    icon.classList.add("fa-eye-slash");
+                }
+            });
+        });
+    });
+</script>
+{% endblock js %}

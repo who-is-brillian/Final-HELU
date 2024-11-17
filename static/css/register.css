@@ -1,0 +1,17 @@
+    .toggle-password {
+        height: 100%;
+        border: none;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .toggle-password i {
+        font-size: 1.2em;
+        cursor: pointer;
+    }
+
+    .form-control {
+        padding-right: 2.5rem; /* Berikan ruang agar ikon tidak menimpa teks input */
+    }
