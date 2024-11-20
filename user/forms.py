@@ -42,10 +42,10 @@ class UserForm(forms.ModelForm):
 
         if password and confirm_password and password != confirm_password:
             # raise forms.ValidationError("Password and Confirm Password do not match.")
-            self.add_error('password','Password and Confirm Password do not match.')
+            self.add_error('password','Password dan Konfirmasi Password tidak sama.')
         if user:
             # raise forms.ValidationError("email yang sudah anda masukan sudah terdaftar!")    
-            self.add_error('email',"email yang sudah anda masukan sudah terdaftar!")
+            self.add_error('email',"email yang anda masukan sudah terdaftar!")
         return cleaned_data
 
     class Meta:

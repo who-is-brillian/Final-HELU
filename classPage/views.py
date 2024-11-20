@@ -15,9 +15,6 @@ def class_page(request):
         }
     return render (request,'class.html', context)
 
-def grammar(request):
-    return render (request,'class_pages/grammar.html')
-
 def class_detail(request, url_slug):
     class_detail = get_object_or_404(Classpages, url_slug=url_slug)
     template_name = f'class_pages/{url_slug}.html'  # Gunakan nama template sesuai slug
