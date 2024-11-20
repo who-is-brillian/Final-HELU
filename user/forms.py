@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from user.models import UserProfileInfo
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 
 class UserForm(forms.ModelForm):
     username = forms.CharField(
@@ -30,14 +32,20 @@ class UserForm(forms.ModelForm):
         label="Confirm Password"
     )
 
+    
     def clean(self):
         cleaned_data = super().clean()
         password = cleaned_data.get("password")
         confirm_password = cleaned_data.get("confirm_password")
+        email = self.cleaned_data['email']
+        user = User.objects.filter(email=email).last()
 
         if password and confirm_password and password != confirm_password:
-            raise forms.ValidationError("Password and Confirm Password do not match.")
-        
+            # raise forms.ValidationError("Password and Confirm Password do not match.")
+            self.add_error('password','Password and Confirm Password do not match.')
+        if user:
+            # raise forms.ValidationError("email yang sudah anda masukan sudah terdaftar!")    
+            self.add_error('email',"email yang sudah anda masukan sudah terdaftar!")
         return cleaned_data
 
     class Meta:

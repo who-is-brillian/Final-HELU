@@ -26,9 +26,14 @@
             </div>
             {% if user_form.errors or profile_form.errors %}
             <div class="alert alert-danger">
-                <strong>Error!</strong> Please correct the errors below.
+                <strong>Error!</strong> {{user_form.errors}}
             </div>
             {% endif %}
+            <!-- {% if user_form.email.errors or profile_form.errors %}
+            <div class="alert alert-danger">
+                <strong>Error!</strong> {{user_form.email.errors}}
+            </div>
+            {% endif %} -->
             
             {% csrf_token %}
             <div class="mb-3">

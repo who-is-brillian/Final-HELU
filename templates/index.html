@@ -101,7 +101,7 @@
                             <li><i class="bi bi-check-circle-fill"></i> Level: {{ class.level }}</li>
                             <li><i class="bi bi-check-circle-fill"></i> Jam belajar fleksibel</li>
                         </ul>            
-                        <a href="#" class="no-hover btn bg-dark1 color-light btn-class-info">Info Selanjutnya</a>
+                        <a href="{% url 'classPage:class_page' %}" class="no-hover btn bg-dark1 color-light btn-class-info">Info Selanjutnya</a>
                     </div>
                     <div class="card-footer text-muted">
                         Pendaftaran ditutup kapan saja jika kuota sudah penuh
@@ -112,7 +112,7 @@
         </div>        
       </div>
     <div class="d-grid">
-      <a href="class.html" class="no-hover btn bg-dark1 color-light btn-class-info btn-lg mx-auto">View All Class</a>
+      <a href="{% url 'classPage:class_page' %}" class="no-hover btn bg-dark1 color-light btn-class-info btn-lg mx-auto">View All Class</a>
     </div>
   </section>
   
