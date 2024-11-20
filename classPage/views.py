@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.templatetags.static import static  # Import static
 from .models import Classpages
 
@@ -18,3 +17,8 @@ def class_page(request):
 
 def grammar(request):
     return render (request,'class_pages/grammar.html')
+
+def class_detail(request, url_slug):
+    class_detail = get_object_or_404(Classpages, url_slug=url_slug)
+    template_name = f'class_pages/{url_slug}.html'  # Gunakan nama template sesuai slug
+    return render(request, template_name, {'class': class_detail})

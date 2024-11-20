@@ -21,7 +21,7 @@ class Classpages(models.Model):
     level = models.CharField(max_length=50, choices=LEVEL_CHOICES, default=BEGINNER)
     image_url = models.CharField(max_length=255)
 
-    link_page = models.CharField(max_length=200)
+    url_slug = models.CharField(max_length=50, default='grammar')  # Default URL slug
 
     def __str__(self):
         return self.title
