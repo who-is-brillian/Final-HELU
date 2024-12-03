@@ -260,9 +260,7 @@
       </div>
     </div>
   </section>
-  
-  <!-- Our Mentors end -->
-  
+
   <section id="carouselExampleIndicators" class="carousel carousel-dark slide d-block bg-light1 py-5">
     <h2 class="text-center fw-bold mt-5">What Our <span class="color-medium-dark">Customer Says</span></h2>
     <div class="carousel-indicators">
@@ -523,6 +521,28 @@
       </section>
     </div>
   </section>
+
+  <h1>Testimonials</h1>
+
+  <!-- Form untuk menambahkan komentar -->
+  <h2>Add a Testimonial</h2>
+  <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Submit</button>
+  </form>
+
+  <!-- Menampilkan daftar komentar -->
+  <h3>Comments</h3>
+  <div>
+      {% for testimonial in testimonials %}
+          <div>
+              <h4>{{ testimonial.name }}</h4>
+              <p>{{ testimonial.comment }}</p>
+              <p><em>Submitted on {{ testimonial.created_at }}</em></p>
+          </div>
+      {% endfor %}
+  </div>
 {%endblock content%}
 
 {%block js%}

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'contact',
     'django_recaptcha',
     'user',
+    'testiomonials'
     ]
 
 

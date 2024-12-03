@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from testiomonials import views as other
 from user import views
 
 urlpatterns = [
@@ -24,5 +25,6 @@ urlpatterns = [
     path('classPage/', include('classPage.urls')),
     path('contact/', include('contact.urls')),
     path('login/', include('user.urls')),
+    path('otherPage/',other.comments,name='other_Page'),
     path('logout/', views.user_logout, name='logout'),
 ]
