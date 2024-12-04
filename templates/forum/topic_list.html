@@ -1,0 +1,16 @@
+{% extends 'topicBase.html' %}
+{%load static%}
+
+{%block title%} {{title}} {%endblock title%}
+
+{%block content%}
+    <h2>Topics</h2>
+    <ul>
+        {% for topic in topics %}
+            <li>
+                <a href="{% url 'topic_detail' topic.pk %}">{{ topic.title }}</a>
+                ({{ topic.created_by }}, {{ topic.created_at }})
+            </li>
+        {% endfor %}
+    </ul>
+{%endblock content%}

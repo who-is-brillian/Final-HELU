@@ -1,0 +1,16 @@
+{% extends 'topicBase.html' %}
+{%load static%}
+
+{%block content%}
+<h2>{{ topic.title }}</h2>
+<p>{{ topic.description }}</p>
+<h3>Posts</h3>
+<ul>
+    {% for post in topic.posts.all %}
+        <li>{{ post.content }} ({{ post.created_by }}, {{ post.created_at }})</li>
+    {% endfor %}
+</ul>
+{% if user.is_authenticated %}
+    <a href="{% url 'new_post' topic.pk %}">Add a Post</a>
+{% endif %}
+{%endblock content%}

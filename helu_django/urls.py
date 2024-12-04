@@ -27,4 +27,5 @@ urlpatterns = [
     path('login/', include('user.urls')),
     path('otherPage/',other.comments,name='other_Page'),
     path('logout/', views.user_logout, name='logout'),
-]
+    path('forum/', include('forum_discuss.urls')),
+    ]

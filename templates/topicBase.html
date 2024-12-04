@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Discussion Forum</title>
+</head>
+<body>
+    <h1>Discussion Forum</h1>
+    <nav>
+        <a href="{% url 'topic_list' %}">Home</a> |
+        {% if user.is_authenticated %}
+            <a href="{% url 'new_topic' %}">New Topic</a> |
+            <a href="/logout/">Logout</a>
+        {% else %}
+            <a href="/login/">Login</a>
+        {% endif %}
+    </nav>
+    <hr>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

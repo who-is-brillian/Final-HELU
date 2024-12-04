@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'contact',
     'django_recaptcha',
     'user',
-    'testiomonials'
+    'testiomonials',
+    'forum_discuss',
     ]
 
 
