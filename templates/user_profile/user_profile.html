@@ -1,0 +1,17 @@
+<!-- user_profile.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 style="margin: 200px;">Profil Saya</h2>
+  <div>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Nomor HP:</strong> {{ user.phone_number }}</p>
+    <p><strong>Alamat:</strong> {{ user.address }}</p>
+    {% if user.profile_picture %}
+      <p><strong>Foto Profil:</strong><br><img src="{{ user.profile_picture.url }}" alt="Profile Picture" style="width: 150px; height: 150px;"></p>
+    {% else %}
+      <p><strong>Foto Profil:</strong> Belum ada foto profil.</p>
+    {% endif %}
+  </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+<!-- user_profile.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 style="margin-top: 200px;">Profil Saya</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+      <label for="id_username">Username</label>
+      {{ form.username }}
+    </div>
+    <div>
+      <label for="id_email">Email</label>
+      {{ form.email }}
+    </div>
+    <div>
+      <label for="id_phone_number">Nomor HP</label>
+      {{ form.phone_number }}
+    </div>
+    <div>
+      <label for="id_profile_picture">Foto Profil</label>
+      {{ form.profile_picture }}
+    </div>
+    <div>
+      <label for="id_address">Alamat</label>
+      {{ form.address }}
+    </div>
+    <button type="submit">Simpan Perubahan</button>
+  </form>
+{% endblock %}

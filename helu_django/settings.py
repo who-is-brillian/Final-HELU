@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'user',
     'testiomonials',
     'forum_discuss',
+    'profile_user',
     ]
 
 

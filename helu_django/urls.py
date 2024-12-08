@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from testiomonials import views as other
+from django.conf import settings
+from django.conf.urls.static import static
 from user import views
 
 urlpatterns = [
@@ -28,4 +30,8 @@ urlpatterns = [
     path('otherPage/',other.comments,name='other_Page'),
     path('logout/', views.user_logout, name='logout'),
     path('forum/', include('forum_discuss.urls')),
-    ]
+    path('profile/', include('profile_user.urls')),  # Pastikan ini ada
+]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

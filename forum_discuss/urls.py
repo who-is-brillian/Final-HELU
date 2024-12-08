@@ -6,4 +6,5 @@ urlpatterns = [
     path('<int:pk>/', views.topic_detail, name='topic_detail'),
     path('new/', views.new_topic, name='new_topic'),
     path('<int:pk>/new_post/', views.new_post, name='new_post'),
+    path('delete_post/<int:pk>/', views.delete_post, name='delete_post'),
 ]
