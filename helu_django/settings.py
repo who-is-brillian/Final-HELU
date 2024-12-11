@@ -128,11 +128,7 @@ SOCIALACCOUNT_PROVIDERS = {
             'access_type': 'online',
         },
         'OAUTH_PKCE_ENABLED': True,
-        'APP': {
-            'client_id': '227756719709-qui5rlb2jesc5khetjrcj335relc8sm2.apps.googleusercontent.com',
-            'secret': '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',
-            'key': ''
-        }
+    #isi dari apps client id
     }
 }
 
