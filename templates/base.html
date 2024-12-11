@@ -75,6 +75,48 @@
                   {% endif %}
               </ul>
           </div>
+          <!-- Konten Navbar -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item m-2">
+                        <a class="nav-link active color-light" href="{% url 'home:index' %}">Home</a>
+                    </li>
+                    <li class="nav-item m-2">
+                        <a class="nav-link color-light" href="{% url 'classPage:class_page' %}">Class</a>
+                    </li>
+                    <li class="nav-item m-2">
+                        <a class="nav-link color-light" href="{% url 'home:about' %}">About Us</a>
+                    </li>
+                    <li class="nav-item m-2">
+                        <a class="nav-link color-light" href="{% url 'contact:contact' %}">Contact Us</a>
+                    </li>
+                    <li class="nav-item m-2">
+                        <a class="nav-link color-light" href="{% url 'topic_list' %}">Forum</a>
+                    </li>
+
+                    <!-- Tombol Login/Logout atau Profil User -->
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center color-light" href="#" role="button" data-bs-toggle="dropdown">
+                        <span class="ms-2">{{ user.username }}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="/profile/">My Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+                    </ul>
+                </li>
+            {% else %}
+                <li class="nav-item m-2">
+                    <a class="btn btn-md bg-light1 border-0 rounded-5 color-dark" href="{% url 'account_login' %}">Sign In</a>
+                </li>
+                <li class="nav-item m-2">
+                    <a class="btn btn-md bg-dark1 border-0 rounded-5 color-medium-light" href="{% url 'account_signup' %}">Sign Up</a>
+                </li>
+            {% endif %}
+
+                   
+                </ul>
+            </div>
       </div>
   </nav>
   
