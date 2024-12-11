@@ -1,15 +1,16 @@
 {%extends 'base.html'%}
 {%block content%}
     <!-- Hero Section -->
-    <section class="bg-teal-500 text-white text-center py-5">
+<main class="container">
+    <section class="bg-medium-dark text-light text-center py-5 rounded-3" style="margin-top: 150px;">
         <h2 class="display-4">Share Your Experience with HELU</h2>
         <p class="lead">Your feedback helps us improve and inspire other learners!</p>
     </section>
 
     <!-- Form untuk menambahkan testimonial -->
     <section id="add-testimonial" class="container my-5">
-        <h3 class="text-center mb-4 text-teal">Add a Testimonial</h3>
-        <form method="POST" class="bg-white p-4 rounded shadow-sm">
+        <h3 class="text-center mb-4 color-dark">Add a Testimonial</h3>
+        <form method="POST" class="bg-light1 p-4 rounded shadow">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
@@ -23,31 +24,31 @@
                 <label for="comment" class="form-label">Comment</label>
                 {{ form.comment}}
             </div>
-            <button type="submit" class="btn btn-teal btn-lg w-100">Submit</button>
+            <button type="submit" class="btn bg-dark1 text-light btn-lg w-100 btn-hover">Submit</button>
         </form>
     </section>
 
     <!-- Menampilkan Daftar Testimonial -->
     <section class="container my-5">
-        <h3 class="text-center mb-4 text-teal">What People Are Saying</h3>
+        <h3 class="text-center mb-4 color-dark">What People Are Saying</h3>
         <div class="row">
             {% for testimonial in testimonials %}
                 <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm">
+                    <div class="card h-100 shadow-lg border-0 rounded">
+                        <div class="card-header bg-medium-dark2 text-light">
+                            <h5 class="card-title mb-0">{{ testimonial.name }}</h5>
+                        </div>
                         <div class="card-body">
-                            <h5 class="card-title text-teal">{{ testimonial.name }}</h5>
-                            <p class="card-text">{{ testimonial.comment }}</p>
-                            <p class="card-footer text-muted text-sm">Submitted on {{ testimonial.created_at }}</p>
+                            <p class="card-text text-justify">{{ testimonial.comment }}</p>
+                        </div>
+                        <div class="card-footer bg-light1 text-muted text-sm text-center">
+                            Submitted on {{ testimonial.created_at }}
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="bg-teal-600 text-white text-center py-3">
-        <p>&copy; 2024 HELU. All rights reserved.</p>
-    </footer>
+</main>
 
 {%endblock content%}
