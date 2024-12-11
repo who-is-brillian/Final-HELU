@@ -3,6 +3,19 @@
 
 {%block title%} {{title}} {%endblock title%}
 
+{%block head%}
+  <style>
+    @media (max-width: 576px) {
+      .list-course{
+        flex-direction: column;
+      }
+      .mentor-card{
+        flex-direction: column;
+      }
+    }
+  </style>
+{%endblock head%}
+
 {%block content%}
         
     <header class="container text-center" style="padding-top: 100px;">
@@ -11,20 +24,20 @@
         <h2>Rp.200.000 - Rp.500.000</h2>
     </header>
 
-    <section class="container py-5 rounded-3 shadow my-5" style="width: 80%;">
-        <h2 class="text-center">Apa saja sih yang di pelajari ?</h2>
-        <div class=" d-flex justify-content-around ">
-            <ul class="fs-5 pt-5">
-                <li>Speaking, listening, sama pronunciation</li>
-                <li>Bedah pronunciation dari suatu conversation</li>
-                <li>Expand vocabularies from academic reading, and story</li>
-                <li>Improving grammar for speaking</li>
-                <li>Speaking, listening, sama pronunciation</li>
-                <li>Bedah pronunciation dari suatu conversation</li>
-            </ul>
-            <img src="{%static 'images/L1.png'%}" alt="" style="width: 300px;">
-        </div>
-    </section>
+    <section class="container py-5 rounded-3 shadow my-5 " style="width: 80%;">
+      <h2 class="text-center">Apa saja sih yang di pelajari ?</h2>
+      <div class=" d-flex justify-content-around list-course ">
+          <ul class="fs-5 pt-5">
+              <li>Speaking, listening, sama pronunciation</li>
+              <li>Bedah pronunciation dari suatu conversation</li>
+              <li>Expand vocabularies from academic reading, and story</li>
+              <li>Improving grammar for speaking</li>
+              <li>Speaking, listening, sama pronunciation</li>
+              <li>Bedah pronunciation dari suatu conversation</li>
+          </ul>
+          <img src="{%static 'images/L1.png'%}" alt="" style="width: 300px;">
+      </div>
+  </section>
 
     <section class="container p-5 rounded-3 shadow my-5" style="width: 80%;">
         <h2>Sistem pembelajaran</h2>
@@ -98,9 +111,9 @@
     </section>
 
     <section>
-        <h2 class="container text-center pb-4" style="width: 80%;">Pilih Mentor Kamu</h2>
+        <h2 class="container text-center pb-4" style="width: 80%;">Profile Mentor</h2>
 
-        <div class="container border shadow d-flex" style="width: 80%;">
+        <div class="container border shadow d-flex mentor-card" style="width: 80%;">
             <img class="p-4" src="{%static 'images/salsa.jpg'%}" alt="bili" style="width: 300px; border-radius: 30px;">
             <div class="card-body mx-4 pt-5">
                 <h5 class="card-title">Alwan Rofiqi, S.M</h5>
