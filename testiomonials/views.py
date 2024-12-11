@@ -12,10 +12,10 @@ def comments(request):
         if form.is_valid():
             # Simpan data komentar ke database
             form.save()
-            return redirect('other_Page')  # Redirect ke halaman index setelah submit
+            return redirect('testimonials')  # Redirect ke halaman index setelah submit
     else:
         form = TestimonialForm()
 
-    return render(request, 'other_page.html', {'form': form, 'testimonials': testimonials})
+    return render(request, 'testimonials.html', {'form': form, 'testimonials': testimonials})
 
 

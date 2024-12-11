@@ -27,7 +27,7 @@ urlpatterns = [
     path('classPage/', include('classPage.urls')),
     path('contact/', include('contact.urls')),
     path('login/', include('user.urls')),
-    path('otherPage/',other.comments,name='other_Page'),
+    path('testimonials/',other.comments,name='testimonials'),
     path('logout/', views.user_logout, name='logout'),
     path('forum/', include('forum_discuss.urls')),
     path('profile/', include('profile_user.urls')),  # Pastikan ini ada
