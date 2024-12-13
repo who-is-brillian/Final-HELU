@@ -43,25 +43,28 @@
                   <!-- Jika user sudah login -->
                   <li class="nav-item dropdown ">
                       <a class="nav-link dropdown-toggle d-flex align-items-center color-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          <!-- Gambar Profil -->
-                          <img src="{{ user.userprofileinfo.profile_pic.url }}" alt="Profile Picture" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                          
                           <!-- Nama User -->
                           <span class="ms-2">{{ user.username }}</span>
                       </a>
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                          <li><a class="dropdown-item" href="#">My Profile</a></li>
-                          <li><a class="dropdown-item" href="{% url 'user:user_logout' %}">Logout</a></li>
+                          
+                          <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                       </ul>
                   </li>
                   {% else %}
                   <!-- Jika user belum login -->
                   <li class="nav-item m-2">
-                      <a class="btn-signIn btn btn-md bg-light1 border-0 rounded-5 color-dark" href="{% url 'user:user_login' %}">Sign In</a>
+                      <a class="btn-signIn btn btn-md bg-light1 border-0 rounded-5 color-dark" href="{% url 'account_login' %}">Sign In</a>
                   </li>
                   <li class="nav-item m-2">
-                      <a class="btn-signUp btn btn-md bg-dark1 border-0 rounded-5 color-medium-light" href="{% url 'user:register' %}">Sign Up</a>
+                      <a class="btn-signUp btn btn-md bg-dark1 border-0 rounded-5 color-medium-light" href="{% url 'account_signup' %}">Sign Up</a>
                   </li>
                   {% endif %}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 31a71bb (forum)
               </ul>
           </div>
       </div>
