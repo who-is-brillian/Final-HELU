@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+HANDLER404 = 'forum_discuss.views.custom_404_view'
 
 # Application definition
 
@@ -58,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'forum_discuss.middleware.RedirectInvalidURLsMiddleware',  # Tambahkan ini
 ]
 
 ROOT_URLCONF = 'helu_django.urls'

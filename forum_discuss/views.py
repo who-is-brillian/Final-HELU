@@ -6,6 +6,7 @@ from django.http import HttpResponseForbidden
 from .forms import TopicForm
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.shortcuts import render
 
 def topic_list(request):
     topics = Topic.objects.all()
@@ -176,4 +177,6 @@ def find_topic(request):
     }
     return render(request, 'forum/find_topic.html', context)
 
+def custom_404_view(request, exception=None):
+    return render(request, 'errors/404.html', status=404)
 
