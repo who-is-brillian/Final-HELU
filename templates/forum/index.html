@@ -1,0 +1,346 @@
+{% extends 'topicBase.html' %}
+
+{% block content %}
+<div class="container-fluid"> {# Gunakan container-fluid agar lebih responsif #}
+    <div class="container"> {# Tambahkan container untuk pengaturan lebar konten #}
+
+    {% if error_message %}
+        <div class="alert alert-danger text-center" role="alert">
+            {{ error_message }}
+        </div>
+    {% endif %}
+
+    {% if view == 'topic_list' %}
+        <div class="row mt-4 d-flex">
+            <div class="col-md-9">
+                <h1 class="color-dark1 text-center mb-2">HELU FORUMS DISCUSS</h1>
+                <p class="color-dark1 text-center">Forum HELU, sebagai media diskusi umum, bertujuan untuk menyediakan wadah daring bagi siapa saja yang ingin berdiskusi dan berbagi pengetahuan, baik dalam bidang pembelajaran bahasa maupun bidang lainnya.</p>                
+                <ul class="list-group gap-1">
+                    {% if request.user.is_authenticated %}
+                    <div class="text-end m-4">
+                        <button class="btn bg-medium-dark text-light btn-hover" data-bs-toggle="modal" data-bs-target="#createTopicModal">Buat Topik Baru</button>
+                    </div>
+                
+                    <div class="modal fade" id="createTopicModal" tabindex="-1" aria-labelledby="createTopicModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content bg-snow"> {# Background modal #}
+                                <div class="modal-header bg-medium-dark"> {# Header modal #}
+                                    <h5 class="modal-title text-light" id="createTopicModalLabel">Buat Topik Baru</h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body bg-light1"> {# Body modal #}
+                                    <form method="post" action="{% url 'new_topic' %}" enctype="multipart/form-data" id="createTopicForm">
+                                        {% csrf_token %}
+                                        <div class="mb-3"> {# Margin bottom untuk label dan input #}
+                                            <label for="title" class="form-label text-dark">Judul:</label>
+                                            <input type="text" name="title" id="title" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="description" class="form-label text-dark">Deskripsi:</label>
+                                            <textarea name="description" id="description" class="form-control" rows="4" required></textarea> {# rows untuk tinggi textarea #}
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="image" class="form-label text-dark">Unggah Gambar:</label>
+                                            <input type="file" name="image" id="image" class="form-control">
+                                        </div>
+                                        <div class="modal-footer bg-medium-dark"> {# Footer modal #}
+                                            <button type="button" class="btn btn-secondary btn-hover" data-bs-dismiss="modal">Tutup</button>
+                                            <button type="submit" class="btn btn-primary btn-hover">Buat</button>
+                                        </div>
+                                    </form>
+                                </div>         
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="text-center m-4">
+                        <a href="{% url 'user:user_login' %}" class="btn bg-dark text-light btn-hover">Login untuk Membuat Topik Baru</a>
+                    </div>
+                {% endif %}
+
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item active" aria-current="page">Home Forums</li>
+                    </ol>
+                </nav>  
+                <a href="{% url 'find_topic' %}" class="fs-5 mb-2 text-end nav-link color-dark"><i class="bi bi-search">Cari Topik</i></a>
+
+                    {% for topic in topics %}
+                        <li class="list-group-item bg-light1 border-1 border-dark-subtle rounded-3">
+                            <a class="text-dark text-decoration-none" href="{% url 'topic_detail' topic.pk %}">
+                                <h4>{{ topic.title }}</h4>
+                                <p>{{ topic.description }}</p>
+                                {% if topic.image %}
+                                    <img src="{{ topic.image.url }}" alt="{{ topic.title }}" class="img-thumbnail" style="max-width: 100%; height: auto;">
+                                {% endif %}
+                                <div class="text-end my-3">
+                                    <form action="{% url 'like_topic' topic.pk %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        {% if request.user in topic.likes.all %}
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                <i class="bi bi-hand-thumbs-up-fill"></i> Liked ({{ topic.total_likes }})
+                                            </button>
+                                        {% else %}
+                                            <button type="submit" class="btn btn-outline-primary btn-sm">
+                                                <i class="bi bi-hand-thumbs-up"></i> Like ({{ topic.total_likes }})
+                                            </button>
+                                        {% endif %}
+                                    </form>
+                                    <form action="{% url 'unlike_topic' topic.pk %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        {% if request.user in topic.unlikes.all %}
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="bi bi-hand-thumbs-down-fill"></i> Unliked ({{ topic.total_unlikes }})
+                                            </button>
+                                        {% else %}
+                                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                <i class="bi bi-hand-thumbs-down"></i> Unlike ({{ topic.total_unlikes }})
+                                            </button>
+                                        {% endif %}
+                                    </form>
+                                </div>       
+                            </a>
+                            {% if request.user == topic.created_by or request.user.is_staff %}
+                                <a href="{% url 'edit_topic' pk=topic.pk %}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square fs-3"></i></a>
+                            {% endif %}
+                            {% if request.user == topic.created_by or request.user.is_staff %}
+                                <button class="btn btn-danger btn-sm float-end" data-bs-toggle="modal" data-bs-target="#deleteTopicModal-{{ topic.pk }}"><i class="bi bi-trash fs-3"></i></button>
+                            {% endif %}
+                        </li>
+
+                        {# Modal Bootstrap untuk konfirmasi penghapusan #}
+                        <div class="modal fade" id="deleteTopicModal-{{ topic.pk }}" tabindex="-1" aria-labelledby="deleteTopicModalLabel-{{ topic.pk }}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteTopicModalLabel-{{ topic.pk }}">Konfirmasi Hapus Topik</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Anda yakin ingin menghapus topik <strong>{{ topic.title }}</strong>?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form method="post" action="{% url 'delete_topic' topic.pk %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                                        </form>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <aside class="col-md-3">
+                <ul class="list-group bg-light1 p-3 h-auto rounded mb-3">
+                    <h3 class="text-dark">Topik Terbaru</h3>
+                    {% for topic in latest_topics %}
+                        <li class="list-group-item">
+                            <a class="text-dark text-decoration-none" href="{% url 'topic_detail' topic.pk %}">
+                                <strong>{{ topic.title }}</strong>
+                            </a>
+                            <p class="text-muted small">Dibuat pada: {{ topic.created_at|date:"d M Y H:i" }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <ul class="list-group bg-light1 p-3 h-auto rounded">
+                    <h3 class="text-center color-dark">Topik Terpopuler</h3>
+                    {% for popular in popular_topics %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="{% url 'topic_detail' popular.pk %}" class="text-decoration-none">{{ popular.title }}</a>
+                            <span class="badge bg-success">{{ popular.like_count }} Likes</span>
+                        </li>
+                    {% empty %}
+                        <li class="list-group-item">Belum ada topik populer.</li>
+                    {% endfor %}
+                </ul>
+            </aside>
+        </div>
+
+        {% elif view == 'topic_detail' %}
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h1 class="color-dark text-center">{{ topic.title }}</h1>
+                <p class="color-dark">{{ topic.description }}</p>
+                {% if topic.image %}
+                    <img src="{{ topic.image.url }}" alt="{{ topic.title }}" class="img-thumbnail" style="max-width: 100%; height: auto;">
+                {% endif %}
+                <div class="text-center my-3">
+                    <form action="{% url 'like_topic' topic.pk %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        {% if request.user in topic.likes.all %}
+                            <button type="submit" class="btn btn-success btn-sm">
+                                <i class="bi bi-hand-thumbs-up-fill"></i> Liked ({{ topic.total_likes }})
+                            </button>
+                        {% else %}
+                            <button type="submit" class="btn btn-outline-success btn-sm">
+                                <i class="bi bi-hand-thumbs-up"></i> Like ({{ topic.total_likes }})
+                            </button>
+                        {% endif %}
+                    </form>
+                    <form action="{% url 'unlike_topic' topic.pk %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        {% if request.user in topic.unlikes.all %}
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="bi bi-hand-thumbs-down-fill"></i> Unliked ({{ topic.total_unlikes }})
+                            </button>
+                        {% else %}
+                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                <i class="bi bi-hand-thumbs-down"></i> Unlike ({{ topic.total_unlikes }})
+                            </button>
+                        {% endif %}
+                    </form>
+                </div>                
+                <h2 class="text-dark">Komentar:</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'topic_list' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ topic.title }}</li>
+                    </ol>
+                </nav>
+                {% if request.user.is_authenticated %}
+                <div class="my-4" >
+                    <button id="toggleCommentFormButton" class="btn bg-dark1 color-light btn-hover">Tambah Komentar</button>
+                    <form id="commentForm" method="post" class="p-3 d-none"> {# Awalnya disembunyikan dengan class d-none #}
+                        {% csrf_token %}
+                        <textarea name="content" class="form-control" placeholder="Klik untuk menambahkan komentar" required></textarea>
+                        <button type="submit" class="btn bg-dark1 color-light btn-hover float-end mt-2">Kirim Komentar</button>
+                    </form>
+                </div>
+                {% else %}
+                <div class="text-center mt-4">
+                    <p class="text-light">Anda harus login untuk membalas.</p>
+                </div>
+                {% endif %}   
+
+                <div class="row mt-5">
+                    {% for post in posts %}
+                    <div class="col-md-12 mb-3">
+                        <div class="card bg-light1 text-dark pb-3">
+                            <div class="card-body">
+                                <p>{{ post.content }}</p>
+                                <p class="text-muted">
+                                    Oleh: {{ post.created_by.username }} pada {{ post.created_at }}
+                                    {% if request.user == post.created_by or request.user.is_staff %}
+                                    <button class="btn btn-danger btn-sm float-end"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#deleteCommentModal"
+                                            onclick="setDeleteFormAction('{% url 'delete_post' post.pk %}')">Hapus
+                                    </button>
+                                    {% endif %}
+                                    <button class="btn btn-secondary btn-sm float-end me-2" onclick="toggleReplyForm('{{ post.pk }}')">Balas</button>
+                                </p>
+                                <div id="reply-form-{{ post.pk }}" class="reply-form d-none mt-3">
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="parent_id" value="{{ post.pk }}">
+                                        <textarea name="content" class="form-control" rows="2" required></textarea>
+                                        <button type="submit" class="btn bg-medium-dark btn-hover mt-2">Kirim</button>
+                                    </form>
+                                </div>
+                            </div>
+        
+                            {% for reply in post.replies.all %}
+                            <div class="card text-dark ms-5 m-2">
+                                <div class="card-body">
+                                    <p>{{ reply.content }}</p>
+                                    <p class="text-muted">
+                                        Dibalas oleh: {{ reply.created_by.username }} pada {{ reply.created_at }}
+                                        {% if request.user == reply.created_by or request.user.is_staff %}
+                                        <button class="btn btn-danger btn-sm float-end"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#deleteCommentModal"
+                                                onclick="setDeleteFormAction('{% url 'delete_reply' reply.pk %}')">
+                                            Hapus
+                                        </button>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>             
+            </div>
+        </div>
+        
+        <!-- Modal Bootstrap -->
+        <div class="modal fade" id="deleteCommentModal" tabindex="-1" aria-labelledby="deleteCommentModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteCommentModalLabel">Konfirmasi Penghapusan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Apakah Anda yakin ingin menghapus komentar ini?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <form id="deleteCommentForm" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>   
+
+    {% endif %}
+
+    </div>
+</div>
+
+<script>
+    function toggleReplyForm(postId) {
+        const replyForm = document.getElementById(`reply-form-${postId}`);
+        replyForm.classList.toggle('d-none');
+    }
+
+    //add modal delete topics
+    document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("createTopicModal");
+    const createButton = document.getElementById("createTopicButton");
+    const closeButton = document.getElementById("closeModalButton");
+
+    createButton.addEventListener("click", function () {
+        modal.style.display = "block";
+    });
+
+    closeButton.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+});
+
+function setDeleteFormAction(deleteUrl) {
+    const deleteForm = document.getElementById("deleteCommentForm");
+    deleteForm.action = deleteUrl;
+}
+
+//field komentar
+document.addEventListener('DOMContentLoaded', function () {
+    const toggleButton = document.getElementById('toggleCommentFormButton');
+    const commentForm = document.getElementById('commentForm');
+
+    toggleButton.addEventListener('click', function () {
+        if (commentForm.classList.contains('d-none')) {
+            commentForm.classList.remove('d-none');
+            toggleButton.textContent = "Tutup Komentar";
+        } else {
+            commentForm.classList.add('d-none');
+            toggleButton.textContent = "Tambah Komentar";
+        }
+    });
+});
+    
+</script>
+{% endblock %}

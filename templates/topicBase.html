@@ -37,8 +37,9 @@
                       <a class="nav-link color-light" href="{% url 'topic_list' %}">Forum Discuss</a>
                   </li>
                   <li class="nav-item m-2">
-                      <a class="nav-link color-light" href="{% url 'new_topic' %}">Add New Topic</a>
+                    <a href="{% url 'find_topic' %}" class="nav-link color-light"><i class="bi bi-search">Cari Topik</i></a>
                   </li>
+
     
                   <!-- Tombol Login/Sign Up atau Profil User -->
                   {% if user.is_authenticated %}
@@ -72,7 +73,7 @@
     {%block content%}
 
     {%endblock content%}
-    <footer class="footer bg-medium-dark text-white py-5 ">
+    <footer class="footer bg-medium-dark text-white py-5 mt-5 ">
       <div class="container">
         <div class="row">
           <!-- Logo and Company Info -->

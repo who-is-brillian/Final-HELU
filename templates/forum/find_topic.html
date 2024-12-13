@@ -1,0 +1,56 @@
+{% extends 'topicBase.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center">Pencarian Topik</h1>
+    <form method="get" action="{% url 'find_topic' %}" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Cari topik..." value="{{ query }}">
+            <button class="btn btn-primary" type="submit">Cari</button>
+        </div>
+    </form>
+
+    {% if topics %}
+        <ul class="list-group">
+            {% for topic in topics %}
+                <li class="list-group-item">
+                    <a href="{% url 'topic_detail' topic.pk %}" class="text-decoration-none">
+                        <h4>{{ topic.title }}</h4>
+                        <p>{{ topic.description|truncatewords:20 }}</p>
+                        {% if topic.image %}
+                            <img src="{{ topic.image.url }}" alt="{{ topic.title }}" class="img-thumbnail" style="max-width: 200px; height: auto;">
+                        {% endif %}
+                    </a>
+                    <div class="text-muted small">Dibuat pada: {{ topic.created_at|date:"d M Y H:i" }}</div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <nav aria-label="Pagination">
+            <ul class="pagination mt-4">
+                {% if topics.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?q={{ query }}&page={{ topics.previous_page_number }}">Sebelumnya</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">Sebelumnya</span></li>
+                {% endif %}
+
+                <li class="page-item active">
+                    <span class="page-link">{{ topics.number }}</span>
+                </li>
+
+                {% if topics.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?q={{ query }}&page={{ topics.next_page_number }}">Berikutnya</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">Berikutnya</span></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% else %}
+        <p class="text-center">Tidak ada topik yang ditemukan untuk pencarian "{{ query }}".</p>
+    {% endif %}
+</div>
+{% endblock %}
