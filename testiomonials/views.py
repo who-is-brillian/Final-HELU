@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, redirect
 from .models import Testimonial
 from .forms import TestimonialForm
@@ -17,5 +16,3 @@ def comments(request):
         form = TestimonialForm()
 
     return render(request, 'testimonials.html', {'form': form, 'testimonials': testimonials})
-
-

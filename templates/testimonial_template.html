@@ -1,0 +1,70 @@
+{% load static %}
+{% block head %}
+<style>
+    .testimonial-container {
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: 20px;
+    }
+
+    .testimonial-container .row {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    .testimonial-container .col-md-4 {
+        flex: 0 0 auto;
+        margin-right: 16px;
+    }
+
+    .card-body {
+        min-height: 150px;
+    }
+
+    /* Menambahkan style untuk elemen star rating */
+    .star-rating i {
+        color: #ffc107;
+    }
+
+    /* Menyesuaikan tampilan agar responsif di perangkat mobile */
+    @media (max-width: 768px) {
+        .testimonial-container .col-md-4 {
+            flex: 0 0 100%;
+            margin-right: 0;
+        }
+    }
+</style>
+{% endblock head %}
+
+<section class="container my-5">
+    <h3 class="text-center mb-4 text-dark">What People Are Saying</h3>
+    <div class="testimonial-container">
+        <div class="row">
+            {% for testimonial in global_testimonials %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-lg border-0 rounded">
+                        <div class="card-header bg-medium-dark2 text-light">
+                            <h5 class="card-title mb-0">{{ testimonial.name }}</h5>
+                            <p class="text-white">{{ testimonial.email }}</p>
+                            <div class="star-rating">
+                                <!-- Menampilkan rating dengan ikon bintang -->
+                                {% for i in "12345"|slice:":testimonial.rating" %}
+                                    <i class="bi bi-star-fill"></i>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text text-justify">{{ testimonial.comment }}</p>
+                        </div>
+                        <div class="card-footer bg-light text-muted text-sm text-center">
+                            <!-- Menampilkan kelas dan email -->
+                            <p><strong>Class: </strong>{{ testimonial.class_name }}</p>
+                            
+                            <p>Submitted on {{ testimonial.created_at }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

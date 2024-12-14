@@ -1,5 +1,5 @@
-{%extends 'base.html'%}
-{%block content%}
+{% extends 'base.html' %}
+{% block content %}
     <!-- Hero Section -->
 <main class="container">
     <section class="bg-medium-dark text-light text-center py-5 rounded-3" style="margin-top: 150px;">
@@ -10,23 +10,33 @@
     <!-- Form untuk menambahkan testimonial -->
     <section id="add-testimonial" class="container my-5">
         <h3 class="text-center mb-4 color-dark">Add a Testimonial</h3>
-        <form method="POST" class="bg-light1 p-4 rounded shadow">
+        <form method="POST" class="bg-light1 p-4 rounded shadow-lg">
             {% csrf_token %}
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="name" class="form-label">Name</label>
-                {{ form.name}}
+                {{ form.name }}
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="email" class="form-label">Email</label>
-                {{ form.email}}
+                {{ form.email }}
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="comment" class="form-label">Comment</label>
-                {{ form.comment}}
+                {{ form.comment }}
             </div>
-            <button type="submit" class="btn bg-dark1 text-light btn-lg w-100 btn-hover">Submit</button>
+            <div class="mb-4">
+                <label for="rating" class="form-label">Rating</label>
+                {{ form.rating }}
+            </div>
+            <div class="mb-4">
+                <label for="class_name" class="form-label">Class</label>
+                {{ form.class_name }}
+            </div>
+            <button type="submit" class="btn bg-dark1 text-light btn-lg w-100 btn-hover mt-3">Submit</button>
         </form>
     </section>
+    
+    
 
     <!-- Menampilkan Daftar Testimonial -->
     <section class="container my-5">
@@ -37,12 +47,23 @@
                     <div class="card h-100 shadow-lg border-0 rounded">
                         <div class="card-header bg-medium-dark2 text-light">
                             <h5 class="card-title mb-0">{{ testimonial.name }}</h5>
+                            <!-- Menampilkan rating dengan ikon bintang -->
+                            <div>
+                                {% for i in "12345"|slice:":5" %}
+                                    {% if forloop.counter <= testimonial.rating %}
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                    {% else %}
+                                        <i class="bi bi-star text-warning"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>  
                         </div>
                         <div class="card-body">
                             <p class="card-text text-justify">{{ testimonial.comment }}</p>
                         </div>
                         <div class="card-footer bg-light1 text-muted text-sm text-center">
-                            Submitted on {{ testimonial.created_at }}
+                            Submitted on {{ testimonial.created_at }}<br>
+                            Class: {{ testimonial.class_name }} <!-- Menampilkan kelas -->
                         </div>
                     </div>
                 </div>
@@ -51,4 +72,4 @@
     </section>
 </main>
 
-{%endblock content%}
+{% endblock content %}

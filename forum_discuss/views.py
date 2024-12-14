@@ -126,6 +126,11 @@ def delete_reply(request, pk):
 
     return render(request, 'forum/confirm_delete.html', {'post': reply})
 
+
+def get_referer_url(request):
+    """Helper to get the referer URL or fallback to a default."""
+    return request.META.get('HTTP_REFERER', '/')
+
 @login_required
 def like_topic(request, pk):
     topic = get_object_or_404(Topic, pk=pk)
@@ -134,7 +139,7 @@ def like_topic(request, pk):
     else:
         topic.likes.add(request.user)  # Tambahkan like
         topic.unlikes.remove(request.user)  # Pastikan unlike dihapus jika ada
-    return redirect('topic_detail', pk=pk)
+    return redirect(get_referer_url(request))
 
 @login_required
 def unlike_topic(request, pk):
@@ -144,7 +149,7 @@ def unlike_topic(request, pk):
     else:
         topic.unlikes.add(request.user)  # Tambahkan unlike
         topic.likes.remove(request.user)  # Pastikan like dihapus jika ada
-    return redirect('topic_detail', pk=pk)
+    return redirect(get_referer_url(request))
 
 
 @login_required

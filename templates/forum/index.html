@@ -58,11 +58,6 @@
                     </div>
                 {% endif %}
 
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                      <li class="breadcrumb-item active" aria-current="page">Home Forums</li>
-                    </ol>
-                </nav>  
                 <a href="{% url 'find_topic' %}" class="fs-5 mb-2 text-end nav-link color-dark"><i class="bi bi-search">Cari Topik</i></a>
 
                     {% for topic in topics %}
@@ -101,10 +96,10 @@
                                 </div>       
                             </a>
                             {% if request.user == topic.created_by or request.user.is_staff %}
-                                <a href="{% url 'edit_topic' pk=topic.pk %}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square fs-3"></i></a>
+                                <a href="{% url 'edit_topic' pk=topic.pk %}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square fs-5"></i></a>
                             {% endif %}
                             {% if request.user == topic.created_by or request.user.is_staff %}
-                                <button class="btn btn-danger btn-sm float-end" data-bs-toggle="modal" data-bs-target="#deleteTopicModal-{{ topic.pk }}"><i class="bi bi-trash fs-3"></i></button>
+                                <button class="btn btn-danger btn-sm float-end" data-bs-toggle="modal" data-bs-target="#deleteTopicModal-{{ topic.pk }}"><i class="bi bi-trash fs-5"></i></button>
                             {% endif %}
                         </li>
 
@@ -164,9 +159,7 @@
             <div class="col-md-12">
                 <h1 class="color-dark text-center">{{ topic.title }}</h1>
                 <p class="color-dark">{{ topic.description }}</p>
-                {% if topic.image %}
-                    <img src="{{ topic.image.url }}" alt="{{ topic.title }}" class="img-thumbnail" style="max-width: 100%; height: auto;">
-                {% endif %}
+
                 <div class="text-center my-3">
                     <form action="{% url 'like_topic' topic.pk %}" method="post" style="display: inline;">
                         {% csrf_token %}
@@ -193,13 +186,16 @@
                         {% endif %}
                     </form>
                 </div>                
-                <h2 class="text-dark">Komentar:</h2>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{% url 'topic_list' %}">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ topic.title }}</li>
+                      <li class="breadcrumb-item"><a href="{% url 'topic_list' %}">Forums</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">{{ topic.title }}</li>
                     </ol>
-                </nav>
+                </nav>    
+                {% if topic.image %}
+                    <img src="{{ topic.image.url }}" alt="{{ topic.title }}" class="img-thumbnail" style="max-width: 100%; height: auto;">
+                {% endif %}              
+                <h2 class="text-dark">Komentar:</h2>
                 {% if request.user.is_authenticated %}
                 <div class="my-4" >
                     <button id="toggleCommentFormButton" class="btn bg-dark1 color-light btn-hover">Tambah Komentar</button>

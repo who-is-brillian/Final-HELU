@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.templatetags.static import static  # Import static
 from .models import Count,Class,Mentor
+from testiomonials.models import Testimonial
+
 
 def index(request):
     count = Count.objects.first()
@@ -31,3 +33,7 @@ def about(request):
 
         }
     return render (request,'about.html', context)
+
+def homeTestimonial(request):
+    testimonials = Testimonial.objects.all()
+    return render(request, 'index.html', {'testimonials': testimonials})
