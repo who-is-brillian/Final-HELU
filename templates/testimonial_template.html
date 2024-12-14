@@ -48,8 +48,12 @@
                             <p class="text-white">{{ testimonial.email }}</p>
                             <div class="star-rating">
                                 <!-- Menampilkan rating dengan ikon bintang -->
-                                {% for i in "12345"|slice:":testimonial.rating" %}
-                                    <i class="bi bi-star-fill"></i>
+                                {% for i in "12345"|slice:":5" %}
+                                    {% if forloop.counter <= testimonial.rating %}
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                    {% else %}
+                                        <i class="bi bi-star text-warning"></i>
+                                    {% endif %}
                                 {% endfor %}
                             </div>
                         </div>
