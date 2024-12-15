@@ -134,6 +134,11 @@ SOCIALACCOUNT_PROVIDERS = {
         },
         'OAUTH_PKCE_ENABLED': True,
     #isi dari apps client id
+        # 'APP': {
+        #     'client_id': '227756719709-qui5rlb2jesc5khetjrcj335relc8sm2.apps.googleusercontent.com',
+        #     'secret': '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',
+        #     'key': ''
+        # }
     }
 }
 
