@@ -18,7 +18,7 @@ def course_page(request):
 @login_required
 def course_list(request):
     courses = Course.objects.all()
-    paginator = Paginator(courses, 10)  # 10 kursus per halaman
+    paginator = Paginator(courses, 9)  # 10 kursus per halaman
     page_number = request.GET.get('page')
     page_courses = paginator.get_page(page_number)
 
