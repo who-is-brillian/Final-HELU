@@ -1,0 +1,213 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block head%}
+<style>
+    .btn-custom {
+        background-color: #4f709c;
+        color: #f5efe7;
+        transition: all 0.3s ease;
+    }
+    .btn-custom:hover {
+        background-color: #213555;
+        color: #f5efe7;
+        transform: scale(1.05);
+    }
+    
+    .card-hover:hover {
+        transform: translateY(-10px);
+        transition: transform 0.3s ease;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+    
+    .hero-section {
+        background: linear-gradient(135deg, #4f709c 0%, #213555 100%);
+    }
+</style>
+{%endblock head%}
+{%block title%} {{title}} {%endblock title%}
+{%block content%}
+<body class="bg-light1">
+    <!-- Hero Section -->
+    <div class="hero-section bg-medium-dark2 text-light py-5 my-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-3">Transform Your Learning Journey</h1>
+                    <p class="lead mb-4">Unlock your potential with HELU's comprehensive online courses. Learn anytime, anywhere.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#courses" class="btn btn-light text-dark rounded-pill px-4 py-2">
+                            Explore Courses
+                        </a>
+                        <a href="#" class="btn btn-outline-light rounded-pill px-4 py-2">
+                            Sign Up Free
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img 
+                        src="{% static 'images/Carousel1.png' %}" 
+                        alt="Learning Platform Illustration" 
+                        class="img-fluid rounded-4 shadow-lg"
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="container py-5">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 bg-snow">
+                    <div class="card-body">
+                        <i class="bi bi-play-circle display-4 color-medium-dark mb-3"></i>
+                        <h3 class="color-dark mb-3">Interactive Courses</h3>
+                        <p class="color-medium-dark">Engaging video lessons and interactive content</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 bg-snow">
+                    <div class="card-body">
+                        <i class="bi bi-award display-4 color-medium-dark mb-3"></i>
+                        <h3 class="color-dark mb-3">Certified Programs</h3>
+                        <p class="color-medium-dark">Professional certificates upon course completion</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 bg-snow">
+                    <div class="card-body">
+                        <i class="bi bi-people display-4 color-medium-dark mb-3"></i>
+                        <h3 class="color-dark mb-3">Community Support</h3>
+                        <p class="color-medium-dark">Connect with learners and instructors worldwide</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Courses Section -->
+    <div id="courses" class="container py-5">
+        <header class="text-center mb-5">
+            <h2 class="display-5 color-dark fw-bold mb-3">Our Popular Courses</h2>
+            <p class="lead color-medium-dark">Discover courses that will boost your skills</p>
+        </header>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for course in courses %}
+            <div class="col">
+                <div class="card h-100 card-hover bg-snow border-0 shadow-sm">
+                    <img
+                        src="{{ course.image.url }}"
+                        alt="{{ course.title }} Course Image"
+                        class="card-img-top"
+                    >
+                    <div class="card-body">
+                        <h3 class="card-title h4 color-dark mb-3">
+                            <a href="{{ course.id }}/" class="text-decoration-none color-dark">
+                                {{ course.title }}
+                            </a>
+                        </h3>
+                        <p class="card-text color-medium-dark mb-4">
+                            {{ course.description|truncatewords:20 }}
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">
+                                <i class="bi bi-book me-2"></i>
+                                Lessons: {{ course.lesson_count }}
+                            </small>
+                            <a
+                                href="{{ course.id }}/"
+                                class="btn btn-hover bg-medium-dark2 text-light rounded-pill"
+                            >
+                                Explore Course
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5">
+            <a href="#" class="btn btn-custom btn-lg rounded-pill px-5">
+                View All Courses
+            </a>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="container py-5">
+        <header class="text-center mb-5">
+            <h2 class="display-5 color-dark fw-bold mb-3">What Our Learners Say</h2>
+            <p class="lead color-medium-dark">Success stories from our community</p>
+        </header>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 bg-snow border-0">
+                    <div class="card-body">
+                        <p class="fst-italic mb-4">"HELU transformed my learning experience. The courses are comprehensive and engaging!"</p>
+                        <div class="d-flex align-items-center">
+                            <img 
+                                src="/api/placeholder/80/80" 
+                                alt="Testimonial" 
+                                class="rounded-circle me-3"
+                            >
+                            <div>
+                                <h5 class="mb-0 color-dark">Sarah Johnson</h5>
+                                <small class="color-medium-dark">Marketing Professional</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 bg-snow border-0">
+                    <div class="card-body">
+                        <p class="fst-italic mb-4">"Flexible learning that fits my busy schedule. Highly recommended!"</p>
+                        <div class="d-flex align-items-center">
+                            <img 
+                                src="/api/placeholder/80/80" 
+                                alt="Testimonial" 
+                                class="rounded-circle me-3"
+                            >
+                            <div>
+                                <h5 class="mb-0 color-dark">Mike Chen</h5>
+                                <small class="color-medium-dark">Software Engineer</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 bg-snow border-0">
+                    <div class="card-body">
+                        <p class="fst-italic mb-4">"The instructors are world-class and the content is top-notch!"</p>
+                        <div class="d-flex align-items-center">
+                            <img 
+                                src="/api/placeholder/80/80" 
+                                alt="Testimonial" 
+                                class="rounded-circle me-3"
+                            >
+                            <div>
+                                <h5 class="mb-0 color-dark">Emma Rodriguez</h5>
+                                <small class="color-medium-dark">Graphic Designer</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="bg-medium-dark text-light py-5">
+        <div class="container text-center">
+            <h2 class="display-5 mb-4">Start Your Learning Journey Today</h2>
+            <p class="lead mb-4">Join thousands of learners transforming their skills and careers</p>
+            <a href="#" class="btn btn-light text-dark btn-lg rounded-pill px-5">
+                Get Started Now
+            </a>
+        </div>
+    </div>
+</body>
+{%endblock content%}

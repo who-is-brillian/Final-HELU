@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'forum_discuss',
     'widget_tweaks',
     'profile_user',
+    'lms',
+    'django.contrib.humanize',
     ]
 
 
