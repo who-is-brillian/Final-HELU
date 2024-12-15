@@ -20,7 +20,7 @@ LOGIN_REDIRECT_URL = '/'
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-nond$j(&xt*x)lubbkgw0%tn23t%vrjk_td5lw21c6m_9q*eso'
+SECRET_KEY = 'django-insecure-nond$j(&xt*x)lubbkgw0%tn23t%vrjk_td5lw21c6m_9q*eso'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -133,12 +133,11 @@ SOCIALACCOUNT_PROVIDERS = {
             'access_type': 'online',
         },
         'OAUTH_PKCE_ENABLED': True,
-    #isi dari apps client id
-        # 'APP': {
-        #     'client_id': '227756719709-qui5rlb2jesc5khetjrcj335relc8sm2.apps.googleusercontent.com',
-        #     'secret': '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',
-        #     'key': ''
-        # }
+        'APP': {
+            'client_id': '227756719709-qui5rlb2jesc5khetjrcj335relc8sm2.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        }
     }
 }
 
