@@ -1,33 +1,45 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Course
-from .decorators import lms_permission_required
 from django.contrib.auth.decorators import login_required
-from testiomonials.models import Testimonial 
+from django.http import HttpResponseForbidden
+from .models import Course
+from testiomonials.models import Testimonial
+from django.core.paginator import Paginator
 
-# View untuk halaman utama course dengan proteksi akses
+
+# View untuk halaman utama kursus dengan proteksi akses
 @login_required
-@lms_permission_required
 def course_page(request):
+    if not request.user.lmspermission.is_allowed:
+        return HttpResponseForbidden("You do not have permission to access the LMS.")
+    
     courses = Course.objects.all()
     return render(request, 'courses/course_list.html', {'courses': courses})
 
-# View untuk daftar semua course (tanpa proteksi, contoh umum)
 @login_required
-@lms_permission_required
 def course_list(request):
     courses = Course.objects.all()
-    return render(request, 'courses/course_list.html', {'courses': courses})
+    paginator = Paginator(courses, 10)  # 10 kursus per halaman
+    page_number = request.GET.get('page')
+    page_courses = paginator.get_page(page_number)
 
-# View untuk detail course berdasarkan ID
+    return render(request, 'courses/course_list.html', {'courses': page_courses})
+
+
+
+# View untuk detail kursus berdasarkan ID
 @login_required
-@lms_permission_required
 def course_detail(request, course_id):
+    if not request.user.lmspermission.is_allowed:
+        return HttpResponseForbidden("You do not have permission to access the LMS.")
+    
     course = get_object_or_404(Course, id=course_id)
     return render(request, 'courses/course_detail.html', {'course': course})
 
-# View untuk halaman writing
+# View untuk halaman writing dengan menampilkan testimonials
 @login_required
-@lms_permission_required
 def writing(request):
+    if not request.user.lmspermission.is_allowed:
+        return HttpResponseForbidden("You do not have permission to access the LMS.")
+    
     testimonials = Testimonial.objects.all()
     return render(request, 'courses/writing.html', {'testimonials': testimonials})

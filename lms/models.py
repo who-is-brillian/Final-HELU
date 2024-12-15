@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.db import models
 
 class Course(models.Model):
     LEVEL_CHOICES = [
@@ -20,11 +20,10 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
-    
 
 class LMSPermission(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_allowed = models.BooleanField(default=False)
-
+    courses = models.ManyToManyField(Course, blank=True, related_name='lmspermission')
     def __str__(self):
         return f"{self.user.username} - {'Allowed' if self.is_allowed else 'Not Allowed'}"

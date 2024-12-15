@@ -111,23 +111,24 @@
                         <p class="card-text color-medium-dark mb-4">
                             {{ course.description|truncatewords:20 }}
                         </p>
+                        {% if course.is_admin_approved %}
+                        <span class="badge bg-success mb-3">Approved by Admin</span>
+                        {% endif %}
                         <div class="d-flex justify-content-between align-items-center">
                             <small class="text-muted">
                                 <i class="bi bi-book me-2"></i>
                                 Lessons: {{ course.lesson_count }}
                             </small>
-                            <a href="{% url 'course_detail' course.id %}" class="text-decoration-none color-dark">
-                                {{ course.title }}
-                            </a>
                             <a href="{% url 'course_detail' course.id %}" class="btn btn-hover bg-medium-dark2 text-light rounded-pill">
                                 Explore Course
-                            </a>                            
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
+        
         <div class="text-center mt-5">
             <a href="#" class="btn btn-custom btn-lg rounded-pill px-5">
                 View All Courses
