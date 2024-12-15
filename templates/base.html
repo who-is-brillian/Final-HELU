@@ -97,12 +97,9 @@
 <<<<<<< HEAD
 =======
                     <p>show_nav_button: {{ show_nav_button }}</p>  <!-- Menampilkan nilai show_nav_button -->
-                    <p>User: {{ user.username }}</p>  <!-- Menampilkan username pengguna -->
-                    <p>Is Authenticated: {{ user.is_authenticated }}</p>  <!-- Menampilkan status autentikasi pengguna -->
-
                     <!-- Menampilkan tombol hanya jika show_nav_button True -->
                     {% if show_nav_button %}
-                        <button>Special Button</button>
+                        <a class="nav-link color-light" href="{% url 'topic_list' %}">Masuk Kelas</a>
                     {% endif %}
                     
 

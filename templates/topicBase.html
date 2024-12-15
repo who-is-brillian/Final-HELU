@@ -36,11 +36,15 @@
                   <li class="nav-item m-2">
                       <a class="nav-link active color-light" href="{% url 'topic_list' %}">Forum Discuss</a>
                   </li>
-<<<<<<< HEAD
-=======
-                 
->>>>>>> 3385c2f (pendaftaran)
 
+                      <a class="nav-link active color-light" href="{% url 'topic_list' %}">Forum Discuss</a>
+                  </li>
+
+                  <p>show_nav_button: {{ show_nav_button }}</p>  <!-- Menampilkan nilai show_nav_button -->
+                  <!-- Menampilkan tombol hanya jika show_nav_button True -->
+                  {% if show_nav_button %}
+                      <a class="nav-link color-light" href="{% url 'topic_list' %}">Masuk Kelas</a>
+                  {% endif %}
     
                   <!-- Tombol Login/Sign Up atau Profil User -->
                   {% if user.is_authenticated %}
@@ -65,10 +69,6 @@
                       <a class="btn-signUp btn btn-md bg-dark1 border-0 rounded-5 color-medium-light" href="{% url 'account_signup' %}">Sign Up</a>
                   </li>
                   {% endif %}
-<<<<<<< HEAD
-=======
-
->>>>>>> 31a71bb (forum)
               </ul>
           </div>
       </div>
