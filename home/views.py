@@ -34,6 +34,10 @@ def about(request):
         }
     return render (request,'about.html', context)
 
+<<<<<<< HEAD
 def homeTestimonial(request):
     testimonials = Testimonial.objects.all()
     return render(request, 'index.html', {'testimonials': testimonials})
+=======
+
+>>>>>>> 3385c2f (pendaftaran)

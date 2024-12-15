@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'profile_user',
     'lms',
     'django.contrib.humanize',
+    'pendaftaran',
      # The following apps are required:
     # 'django.contrib.auth',
     # 'django.contrib.messages',
@@ -140,9 +141,9 @@ SOCIALACCOUNT_PROVIDERS = {
 SITE_ID = 1
 
 # Email backend for development
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-ACCOUNT_SIGNUP_REDIRECT_URL = 'account_login'
+# ACCOUNT_SIGNUP_REDIRECT_URL = 'account_login'
 
 
 # Password validation

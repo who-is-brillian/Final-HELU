@@ -57,8 +57,8 @@
                         <a href="{% url 'account_login' %}" class="btn bg-dark text-light btn-hover">Login untuk Membuat Topik Baru</a>
                     </div>
                 {% endif %}
-
-                <a href="{% url 'find_topic' %}" class="fs-5 mb-2 text-end nav-link color-dark"><i class="bi bi-search">Cari Topik</i></a>
+  
+                <a href="{% url 'find_topic' %}" class="fs-5 mb-2 text-start nav-link color-dark"><i class="bi bi-search">Cari Topik</i></a>
 
                     {% for topic in topics %}
                         <li class="list-group-item bg-light1 border-1 border-dark-subtle rounded-3">

@@ -33,6 +33,7 @@ urlpatterns = [
     path('forum/', include('forum_discuss.urls')),
     path('profile/', include('profile_user.urls')),  # Pastikan ini ada
     path('courses/' ,include('lms.urls')),
+    path('pendaftaran/', include('pendaftaran.urls')), 
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

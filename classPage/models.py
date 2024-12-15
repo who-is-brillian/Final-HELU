@@ -4,12 +4,12 @@ from django.db import models
 
 class Classpages(models.Model):
     BEGINNER = 'Beginner'
-    INTERMEDIATE = 'Standart'
+    INTERMEDIATE = 'Intermediate'
     ADVANCED = 'Advanced'
 
     LEVEL_CHOICES = [
         (BEGINNER, 'Beginner'),
-        (INTERMEDIATE, 'Standart'),
+        (INTERMEDIATE, 'Intermediate'),
         (ADVANCED, 'Advanced'),
     ]
     

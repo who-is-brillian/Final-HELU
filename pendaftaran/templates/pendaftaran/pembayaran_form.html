@@ -1,0 +1,54 @@
+<!-- templates/pendaftaran/pembayaran_form.html -->
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<head>
+    <title>Form Pembayaran</title>
+    <script>
+        function updateHarga() {
+            const kelas = document.getElementById('id_kelas').value;
+            const level = document.getElementById('id_level').value;
+            const harga = document.getElementById('id_harga');
+
+            const hargaDict = {
+                'Kelas Grammar': {'Beginner': 200000, 'Intermediate': 250000, 'Advanced': 300000},
+                'Kelas Listening': {'Beginner': 250000, 'Intermediate': 300000, 'Advanced': 350000},
+                'Kelas Reading': {'Beginner': 180000, 'Intermediate': 220000, 'Advanced': 280000},
+                'Kelas Writing': {'Beginner': 230000, 'Intermediate': 270000, 'Advanced': 320000},
+                'Kelas Speaking': {'Beginner': 240000, 'Intermediate': 290000, 'Advanced': 340000},
+                'Toefl Preparation': {'Beginner': 300000, 'Intermediate': 350000, 'Advanced': 400000},
+                'Ielts Preparation': {'Beginner': 320000, 'Intermediate': 370000, 'Advanced': 420000},
+                'Business English': {'Beginner': 350000, 'Intermediate': 400000, 'Advanced': 450000},
+            };
+
+            harga.value = hargaDict[kelas][level];
+        }
+
+        window.onload = () => {
+            document.getElementById('id_kelas').addEventListener('change', updateHarga);
+            document.getElementById('id_level').addEventListener('change', updateHarga);
+            updateHarga();
+        };
+    </script>
+</head>
+<body>
+    <div class="container mx-auto p-5 mt-5" >
+        <div class="d-flex justify-content-center align-items-center" style="height: 120vh;">
+            <form method="POST" enctype="multipart/form-data" class="w-50 shadow-sm rounded-3 p-4">
+                {% csrf_token %}
+                <h1 class="text-center my-4">Form Pendaftaran</h1>
+                <div class="form-group">
+                    {{ form.as_p }}
+                </div>
+                <div class="d-block">
+                    <p>Dana : 082721335602</p> 
+                    <p> BRI : 839346458</p>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block w-100">Daftar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+{%endblock content%}
