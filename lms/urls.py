@@ -1,4 +1,5 @@
 from django.urls import path
+from django.urls import path
 from . import views
 
 urlpatterns = [
@@ -13,4 +14,5 @@ urlpatterns = [
 
     # URL untuk halaman writing dengan testimonial
     path('writing/', views.writing, name='writing'),
+    
 ]
