@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
-from .models import Course
+from .models import Course, Material
 from testiomonials.models import Testimonial
 from django.core.paginator import Paginator
 
@@ -43,3 +43,17 @@ def writing(request):
     
     testimonials = Testimonial.objects.all()
     return render(request, 'courses/writing.html', {'testimonials': testimonials})
+
+
+def course_detail(request, course_id):
+    # Ambil data kursus berdasarkan course_id
+    course = get_object_or_404(Course, id=course_id)
+
+    # Ambil materi yang terkait dengan kursus tersebut
+    materials = Material.objects.filter(course=course)
+
+    # Render template dengan data kursus dan materi
+    return render(request, 'courses/course_detail.html', {
+        'course': course,
+        'materials': materials
+    })

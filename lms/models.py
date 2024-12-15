@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db import models
 
 class Course(models.Model):
     LEVEL_CHOICES = [
@@ -25,5 +24,15 @@ class LMSPermission(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_allowed = models.BooleanField(default=False)
     courses = models.ManyToManyField(Course, blank=True, related_name='lmspermission')
+
     def __str__(self):
         return f"{self.user.username} - {'Allowed' if self.is_allowed else 'Not Allowed'}"
+
+class Material(models.Model):
+    course = models.ForeignKey(Course, related_name='materials', on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    file = models.FileField(upload_to='course_materials/')
+    
+    def __str__(self):
+        return self.title

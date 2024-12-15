@@ -99,59 +99,25 @@
                         <div class="mb-4">
                             <h3 class="color-dark mb-3">Course Modules</h3>
                             <div class="accordion" id="courseModules">
-                                <div class="accordion-item bg-light1">
-                                    <h2 class="accordion-header" id="headingOne">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                                            Module 1: Reading Fundamentals
-                                        </button>
-                                    </h2>
-                                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#courseModules">
-                                        <div class="accordion-body">
-                                            <ul class="list-group">
-                                                <li class="list-group-item">Understanding different text types</li>
-                                                <li class="list-group-item">Skimming and scanning techniques</li>
-                                                <li class="list-group-item">Basic comprehension strategies</li>
-                                                <li class="list-group-item">Identifying main ideas and supporting details</li>
-                                            </ul>
+                                {% for module in course.materials.all %}
+                                    <div class="accordion-item bg-light1">
+                                        <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+                                            <button class="accordion-button {% if forloop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}">
+                                                {{ module.title }}
+                                            </button>
+                                        </h2>
+                                        <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" data-bs-parent="#courseModules">
+                                            <div class="accordion-body">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">{{ module.description }}</li>
+                                                    <li class="list-group-item"><a href="{{ module.file.url }}" download>Download Material</a></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="accordion-item bg-light1">
-                                    <h2 class="accordion-header" id="headingTwo">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                                            Module 2: Vocabulary Expansion
-                                        </button>
-                                    </h2>
-                                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#courseModules">
-                                        <div class="accordion-body">
-                                            <ul class="list-group">
-                                                <li class="list-group-item">Context clue strategies</li>
-                                                <li class="list-group-item">Word formation and root words</li>
-                                                <li class="list-group-item">Synonyms and antonyms</li>
-                                                <li class="list-group-item">Academic and professional vocabulary</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="accordion-item bg-light1">
-                                    <h2 class="accordion-header" id="headingThree">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
-                                            Module 3: Advanced Comprehension
-                                        </button>
-                                    </h2>
-                                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#courseModules">
-                                        <div class="accordion-body">
-                                            <ul class="list-group">
-                                                <li class="list-group-item">Critical reading skills</li>
-                                                <li class="list-group-item">Inferencing and reading between the lines</li>
-                                                <li class="list-group-item">Analyzing author's tone and purpose</li>
-                                                <li class="list-group-item">Complex text interpretation</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% empty %}
+                                    <p>No modules available for this course.</p>
+                                {% endfor %}
                             </div>
                         </div>
 
