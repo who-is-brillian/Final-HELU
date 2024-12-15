@@ -36,6 +36,9 @@
                   <li class="nav-item m-2">
                       <a class="nav-link color-light" href="{% url 'classPage:class_page' %}">Class</a>
                   </li>
+                  {% if request.user.is_authenticated and request.user.lmspermission.is_allowed %}
+                  <li class="nav-item m-2"><a class="nav-link color-light" href="{% url 'course_page' %}">Course</a></li>
+                  {% endif %}
                   <li class="nav-item m-2">
                       <a class="nav-link color-light" href="{% url 'home:about' %}">About Us</a>
                   </li>

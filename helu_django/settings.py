@@ -61,7 +61,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'forum_discuss.middleware.RedirectInvalidURLsMiddleware',  # Tambahkan ini
+    'forum_discuss.middleware.RedirectInvalidURLsMiddleware',
+    'lms.middleware.EnsureLMSPermissionMiddleware',
 ]
 
 ROOT_URLCONF = 'helu_django.urls'

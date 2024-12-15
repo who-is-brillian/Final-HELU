@@ -116,12 +116,12 @@
                                 <i class="bi bi-book me-2"></i>
                                 Lessons: {{ course.lesson_count }}
                             </small>
-                            <a
-                                href="{{ course.id }}/"
-                                class="btn btn-hover bg-medium-dark2 text-light rounded-pill"
-                            >
-                                Explore Course
+                            <a href="{% url 'course_detail' course.id %}" class="text-decoration-none color-dark">
+                                {{ course.title }}
                             </a>
+                            <a href="{% url 'course_detail' course.id %}" class="btn btn-hover bg-medium-dark2 text-light rounded-pill">
+                                Explore Course
+                            </a>                            
                         </div>
                     </div>
                 </div>
@@ -141,62 +141,7 @@
             <h2 class="display-5 color-dark fw-bold mb-3">What Our Learners Say</h2>
             <p class="lead color-medium-dark">Success stories from our community</p>
         </header>
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 bg-snow border-0">
-                    <div class="card-body">
-                        <p class="fst-italic mb-4">"HELU transformed my learning experience. The courses are comprehensive and engaging!"</p>
-                        <div class="d-flex align-items-center">
-                            <img 
-                                src="/api/placeholder/80/80" 
-                                alt="Testimonial" 
-                                class="rounded-circle me-3"
-                            >
-                            <div>
-                                <h5 class="mb-0 color-dark">Sarah Johnson</h5>
-                                <small class="color-medium-dark">Marketing Professional</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 bg-snow border-0">
-                    <div class="card-body">
-                        <p class="fst-italic mb-4">"Flexible learning that fits my busy schedule. Highly recommended!"</p>
-                        <div class="d-flex align-items-center">
-                            <img 
-                                src="/api/placeholder/80/80" 
-                                alt="Testimonial" 
-                                class="rounded-circle me-3"
-                            >
-                            <div>
-                                <h5 class="mb-0 color-dark">Mike Chen</h5>
-                                <small class="color-medium-dark">Software Engineer</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 bg-snow border-0">
-                    <div class="card-body">
-                        <p class="fst-italic mb-4">"The instructors are world-class and the content is top-notch!"</p>
-                        <div class="d-flex align-items-center">
-                            <img 
-                                src="/api/placeholder/80/80" 
-                                alt="Testimonial" 
-                                class="rounded-circle me-3"
-                            >
-                            <div>
-                                <h5 class="mb-0 color-dark">Emma Rodriguez</h5>
-                                <small class="color-medium-dark">Graphic Designer</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% include 'testimonial_template.html' %}
     </div>
 
     <!-- CTA Section -->

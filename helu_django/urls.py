@@ -31,7 +31,7 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path('forum/', include('forum_discuss.urls')),
     path('profile/', include('profile_user.urls')),  # Pastikan ini ada
-    path('course/' ,include('lms.urls')),
+    path('courses/' ,include('lms.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
