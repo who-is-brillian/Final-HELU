@@ -9,6 +9,12 @@
             <button class="btn btn-primary" type="submit">Cari</button>
         </div>
     </form>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'topic_list' %}">Forums</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Cari Topik</li>
+        </ol>
+    </nav>    
 
     {% if topics %}
         <ul class="list-group">

@@ -60,11 +60,12 @@
 
                     </div>
                 {% endif %}
-
-  
-                <a href="{% url 'find_topic' %}" class="fs-5 mb-2 text-start nav-link color-dark"><i class="bi bi-search">Cari Topik</i></a>
-
-                    {% for topic in topics %}
+                <a href="{% url 'find_topic' %}">
+                <button type="button" class="btn bg-medium-dark text-light btn-hover">
+                    <i class="bi bi-search">Cari Topik</i>
+                </button>
+                </a>
+                {% for topic in topics %}
                         <li class="list-group-item bg-light1 border-1 border-dark-subtle rounded-3">
                             <a class="text-dark text-decoration-none" href="{% url 'topic_detail' topic.pk %}">
                                 <h4>{{ topic.title }}</h4>
