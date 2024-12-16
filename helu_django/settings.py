@@ -49,6 +49,14 @@ INSTALLED_APPS = [
     'profile_user',
     'lms',
     'django.contrib.humanize',
+     # The following apps are required:
+    # 'django.contrib.auth',
+    # 'django.contrib.messages',
+    'allauth',
+    'allauth.account',
+    # Optional -- requires install using `django-allauth[socialaccount]`.
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     ]
 
 
@@ -63,6 +71,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'forum_discuss.middleware.RedirectInvalidURLsMiddleware',
     'lms.middleware.LMSPermissionMiddleware',
+    # Add the account middleware:
+    "allauth.account.middleware.AccountMiddleware",
+
 ]
 
 ROOT_URLCONF = 'helu_django.urls'
@@ -79,6 +90,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'classPage.context_processors.global_testimonials',  # Tambahkan ini
+
+
             ],
         },
     },
@@ -96,6 +109,36 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
+        'APP': {
+            'client_id': '227756719709-qui5rlb2jesc5khetjrcj335relc8sm2.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        }
+    }
+}
+
+
+SITE_ID = 1
+
 
 
 # Password validation
@@ -157,9 +200,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 RECAPTCHA_PUBLIC_KEY = '6Ld2sX0qAAAAAOGOBcPZDgMZ7lxejkJQYX4nV1t-'
 RECAPTCHA_PRIVATE_KEY = '6Ld2sX0qAAAAABCvCNVRHtcnYTIaGLiDzdWTnB8O'
 
-AUTHENTICATION_BACKENDS = [
-    'user.authentication_backend.EmailAuthBackend',  # Ganti dengan path yang benar
-    'django.contrib.auth.backends.ModelBackend',  # Opsional, jika Anda ingin tetap menggunakan default
-]
+
 
 CSRF_FAILURE_VIEW = 'django.views.csrf.csrf_failure'
