@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {%extends 'base.html'%}
 {%load static%}
 
@@ -250,4 +251,157 @@
     </div>
     </section>
 
+=======
+{%extends 'base.html'%}
+{%load static%}
+
+{%block title%} {{title}} {%endblock title%}
+
+{%block head%}
+  <style>
+    @media (max-width: 576px) {
+      .list-course{
+        flex-direction: column;
+      }
+      .mentor-card{
+        flex-direction: column;
+      }
+    }
+  </style>
+{%endblock head%}
+
+{%block content%}
+        
+    <header class="container text-center" style="padding-top: 100px;">
+        <h1>Class Grammar</h1>
+        <h3>Asah bicaramu agar tak kaku lidahmu rorr</h3>
+        <h2>Rp.200.000 - Rp.500.000</h2>
+    </header>
+
+    <section class="container py-5 rounded-3 shadow my-5 " style="width: 80%;">
+      <h2 class="text-center">Apa saja sih yang di pelajari ?</h2>
+      <div class=" d-flex justify-content-around list-course ">
+          <ul class="fs-5 pt-5">
+              <li>Speaking, listening, sama pronunciation</li>
+              <li>Bedah pronunciation dari suatu conversation</li>
+              <li>Expand vocabularies from academic reading, and story</li>
+              <li>Improving grammar for speaking</li>
+              <li>Speaking, listening, sama pronunciation</li>
+              <li>Bedah pronunciation dari suatu conversation</li>
+          </ul>
+          <img src="{%static 'images/L1.png'%}" alt="" style="width: 300px;">
+      </div>
+  </section>
+
+    <section class="container p-5 rounded-3 shadow my-5" style="width: 80%;">
+        <h2>Sistem pembelajaran</h2>
+        <p>Kelas Speaking & Pronunciation Online – Para peserta akan belajar Praktek bicara Bahasa Inggris beserta pronunciation (pelafalan) -nya secara daring (online).Sistem belajarnya sebagai berikut :</p>
+        <div>
+            <ul>
+                <li>Peserta akan dimasukkan ke dalam grup Whatsapp kelas. Dalam grup tersebut terdapat 15 peserta, 1 tutor dan 1 admin kelas.</li>
+                <li>Materi-materi penting akan di-share di grup tersebut setiap hari oleh tutor kelas sebelum tatap muka / praktek.</li>
+                <li>Proses tatap muka dengan tutor menggunakan aplikasi Zoom. Sehingga, masing-masing peserta wajib menginstall aplikasi Zoom.</li>
+                <li>Proses tatap muka berlangsung selama 60 menit per hari pada jam-jam yang peserta pilih saat mengisi form pendaftaran dan form konfirmasi pembayaran.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h3 class="container" style="width: 80%;">Course content</h3>
+        <div class="container mb-5 mt-3 border shadow" style="width: 80%;">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                          Sesi 1: Basics of Grammar (Noun, Verb, Adjective, Adverb)
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body"> Memahami dasar tata bahasa seperti penggunaan kata benda, kerja, sifat, dan keterangan dalam kalimat.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                          Sesi 2: Sentence Structures and Tenses
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body"> Memahami struktur kalimat dasar dan penggunaan tenses untuk berbagai situasi.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                          Sesi 3: Modal Verbs and Conditional Sentences
+                        </button>
+                    </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Pembelajaran modal verbs (can, should, must) dan cara menggunakan conditional sentences dengan benar.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseThree">
+                          Sesi 4: Passive Voice and Reported Speech
+                        </button>
+                    </h2>
+                    <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body"> Mengenal bentuk pasif dan bagaimana melaporkan ucapan seseorang dengan benar.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseThree">
+                          Sesi 5: Grammar Practice for Writing and Speaking
+                        </button>
+                    </h2>
+                    <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Latihan intensif untuk meningkatkan tata bahasa dalam menulis dan berbicara.</div>
+                    </div>
+                </div>
+          </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="container text-center pb-4" style="width: 80%;">Profile Mentor</h2>
+
+        <div class="container border shadow d-flex mentor-card" style="width: 80%;">
+            <img class="p-4" src="{%static 'images/nanda.jpg'%}" alt="bili" style="width: 300px; border-radius: 30px;">
+            <div class="card-body mx-4 pt-5">
+                <h5 class="card-title">Alwan Rofiqi, S.M</h5>
+                <p class="card-subtitle mb-2 text-muted">Mentor reading</p>
+                <div class="mentor-info mb-3">
+                    <div><i class="bi bi-mortarboard"></i> Universitas</div>
+                    <div><i class="bi bi-linkedin"></i> Username Linkedin</div>
+                    <div><i class="bi bi-people"></i> 10 siswa aktif</div>
+                </div>
+                <p class="card-text">Guru Bahasa Inggris Bersertifikat dengan Pengalaman SDM untuk mempersiapkan Wawancara Kerja atau Bahasa Inggris<br><a href="#">Baca Selengkapnya...</a></p>
+                <div class="mentor-schedule text-end mb-3">
+                    Jadwal Mentor<br>Senin & Rabu
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="container p-5 rounded-3 shadow my-5" style="width: 80%;">
+      <h2>Langkah Langkah Pendaftaran</h2>
+     
+      <div>
+          <ol>
+            <li>Mengisi Formulir Pendaftaran di bawah.</li>
+            <li>Transfer pembayaran sesuai dengan biaya yang tercantum .</li>
+            <li>Upload Bukti pembayaran</li>
+            <li>Setelah kamu melakukan submit Pendaftaran. Admin registrasi akan melakukan proses review secara manual pada pembayaran kamu. Proses review maksimal 12 jam.</li>
+            <li>Setelah itu kamu cukup Sit back and Relax. Admin Kelas akan menghubungimu</li>
+          </ol>
+          <a href="{% url 'pendaftaran' %}" class="btn btn-primary" role="button">Daftar Sekarang</a>
+      </div>
+    </section>
+
+    {% include 'testimonial_template.html' %}
+
+>>>>>>> 5c52287 (final Helu)
 {%endblock content%}

@@ -19,7 +19,6 @@ from django.urls import path, include
 from testiomonials import views as other
 from django.conf import settings
 from django.conf.urls.static import static
-from user import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,14 +26,17 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('classPage/', include('classPage.urls')),
     path('contact/', include('contact.urls')),
-    path('login/', include('user.urls')),
+    path('otherPage/',other.comments,name='other_Page'),
     path('testimonials/',other.comments,name='testimonials'),
-    path('logout/', views.user_logout, name='logout'),
     path('forum/', include('forum_discuss.urls')),
-    path('profile/', include('profile_user.urls')),  # Pastikan ini ada
-    path('courses/' ,include('lms.urls')),
+
     path('pendaftaran/', include('pendaftaran.urls')), 
+
+
+    path('profile/', include('profile_user.urls')),  # Pastikan ini ada
+
+    path('course/' ,include('lms.urls')),
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

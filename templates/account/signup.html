@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "account/base_entrance.html" %}
 {% load allauth i18n %}
 {% block head_title %}
@@ -43,3 +44,69 @@
         {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
     {% endif %}
 {% endblock content %}
+=======
+{% extends "account/base_entrance.html" %}
+{% load allauth i18n %}
+{%load static%}
+{% block head_title %}
+    {% trans "Signup" %}
+{% endblock head_title %}
+{% block content %}
+    <section class="d-flex align-items-center justify-content-center h-100" style="margin-top: 50px;">
+        <div class="card shadow-lg" style="width: 400px;">
+            <div class="card-body">
+                <h1 class="text-center mb-4">
+                    {% trans "Sign Up" %}
+                </h1>
+                <img src="{% static 'images/L1.png' %}" alt="Logo Helu" class="w-50 d-block mx-auto">
+
+                {% setvar link %}
+                    <a href="{{ login_url }}">
+                {% endsetvar %}
+                {% setvar end_link %}
+                    </a>
+                {% endsetvar %}
+
+                <p class="text-center mb-4">
+                    {% blocktranslate %}Already have an account? Then please {{ link }}sign in{{ end_link }}.{% endblocktranslate %}
+                </p>
+
+                {% if not SOCIALACCOUNT_ONLY %}
+                    {% url 'account_signup' as action_url %}
+                    <form method="post" action="{{ action_url }}" class="d-flex flex-column" novalidate>
+                        {% csrf_token %}
+                        
+                        {% element fields form=form unlabeled=True %}
+                   
+                        {% endelement %}
+                        
+                        {{ redirect_field }}
+
+                        <div class="mb-3">
+                            <button type="submit" class="btn bg-medium-dark text-light w-100 btn-hover">
+                                {% trans "Sign Up" %}
+                            </button>
+                        </div>
+                    </form>
+                {% endif %}
+
+                {% if PASSKEY_SIGNUP_ENABLED %}
+                    <hr class="my-4">
+                    <div class="text-center">
+                        {% element button href=signup_by_passkey_url tags="btn btn-outline-primary w-100" %}
+                            {% trans "Sign up using a passkey" %}
+                        {% endelement %}
+                    </div>
+                {% endif %}
+
+                {% if SOCIALACCOUNT_ENABLED %}
+                    <hr class="my-4">
+                    <div class="d-grid gap-2">
+                        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+>>>>>>> 5c52287 (final Helu)

@@ -1,4 +1,3 @@
-from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import render
 from django.templatetags.static import static  # Import static
@@ -34,10 +33,7 @@ def about(request):
         }
     return render (request,'about.html', context)
 
-<<<<<<< HEAD
 def homeTestimonial(request):
     testimonials = Testimonial.objects.all()
     return render(request, 'index.html', {'testimonials': testimonials})
-=======
 
->>>>>>> 3385c2f (pendaftaran)

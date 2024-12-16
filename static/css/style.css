@@ -1,0 +1,39 @@
+.custom-social-btn {
+    display: flex;
+    align-items: center;       /* Posisikan ikon dan teks di tengah secara vertikal */
+    justify-content: center;   /* Posisikan konten di tengah secara horizontal */
+    gap: 10px;                 /* Jarak antara ikon dan teks */
+    padding: 10px;             /* Padding agar tombol lebih besar */
+    text-align: center;        /* Mengatur agar teks sejajar tengah */
+    width: 100%;               /* Pastikan tombol mengisi lebar penuh */
+    max-width: 300px;          /* Maksimalkan lebar tombol */
+    margin: 0;            /* Membuat tombol berada di tengah secara horizontal */
+    border-radius: 5px;        /* Opsional: membuat sudut tombol lebih bulat */
+}
+
+.social-icon {
+    width: 24px;               /* Ukuran ikon */
+    height: 24px;
+}
+
+label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Input fields */
+input {
+    width: 100%;          /* Membuat field input mengisi lebar penuh */
+    padding: 12px;        /* Memberikan padding pada field */
+    font-size: 16px;      /* Ukuran font di dalam input */
+    border-radius: 5px;   /* Membuat sudut input lebih bulat */
+    border: 1px solid #ccc;
+    margin-bottom: 15px;  /* Memberikan jarak antara field input */
+}
+
+input:focus {
+    border-color: #007bff; /* Mengubah warna border saat field fokus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Efek fokus */
+}

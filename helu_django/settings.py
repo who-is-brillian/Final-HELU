@@ -11,21 +11,25 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+import environ
+
+env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 LOGIN_REDIRECT_URL = '/'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-nond$j(&xt*x)lubbkgw0%tn23t%vrjk_td5lw21c6m_9q*eso'
-
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
 HANDLER404 = 'forum_discuss.views.custom_404_view'
 
@@ -42,24 +46,27 @@ INSTALLED_APPS = [
     'classPage',
     'contact',
     'django_recaptcha',
-    'user',
     'testiomonials',
     'forum_discuss',
-    'widget_tweaks',
-    'profile_user',
-    'lms',
-    'django.contrib.humanize',
     'pendaftaran',
+
      # The following apps are required:
     # 'django.contrib.auth',
     # 'django.contrib.messages',
+
     'allauth',
     'allauth.account',
+
     # Optional -- requires install using `django-allauth[socialaccount]`.
     'allauth.socialaccount',
+
     'allauth.socialaccount.providers.google',
+    
     'widget_tweaks',
+
     'profile_user',
+    'lms',
+    'django.contrib.humanize',
     ]
 
 
@@ -72,11 +79,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'forum_discuss.middleware.RedirectInvalidURLsMiddleware',
-    'lms.middleware.LMSPermissionMiddleware',
+
+
     # Add the account middleware:
     "allauth.account.middleware.AccountMiddleware",
 
+    'forum_discuss.middleware.RedirectInvalidURLsMiddleware',  # Tambahkan ini
+
+    'forum_discuss.middleware.RedirectInvalidURLsMiddleware',
+    'lms.middleware.LMSPermissionMiddleware',
 ]
 
 ROOT_URLCONF = 'helu_django.urls'
@@ -92,8 +103,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'classPage.context_processors.global_testimonials',  # Tambahkan ini
 
+
+
+                'classPage.context_processors.global_testimonials',  # Tambahkan ini
 
             ],
         },
@@ -109,7 +122,11 @@ WSGI_APPLICATION = 'helu_django.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST', default='localhost'),
+        'PORT': env('DB_PORT', default='5432'),
     }
 }
 
@@ -121,25 +138,20 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-
-
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        },
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': {'access_type': 'online'},
         'OAUTH_PKCE_ENABLED': True,
         'APP': {
-            'client_id': '227756719709-qui5rlb2jesc5khetjrcj335relc8sm2.apps.googleusercontent.com',
-            'secret': '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',
+            'client_id': env('GOOGLE_CLIENT_ID'),
+            'secret': env('GOOGLE_CLIENT_SECRET'),
             'key': ''
         }
     }
 }
+
+
 
 
 SITE_ID = 1
@@ -206,8 +218,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-RECAPTCHA_PUBLIC_KEY = '6Ld2sX0qAAAAAOGOBcPZDgMZ7lxejkJQYX4nV1t-'
-RECAPTCHA_PRIVATE_KEY = '6Ld2sX0qAAAAABCvCNVRHtcnYTIaGLiDzdWTnB8O'
+RECAPTCHA_PUBLIC_KEY = env('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = env('RECAPTCHA_PRIVATE_KEY')
 
 
 

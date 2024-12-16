@@ -1,3 +1,4 @@
+
 # models.py
 from django.db import models
 # models.py
@@ -14,3 +15,8 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+    
+# class Userprofile(models.model):
+#     userid =
+#     phone = models.CharField(max_length=15, null=True, blank=True)
+#     address = models.TextField(null=True, blank=True)

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% load allauth socialaccount %}
 {% get_providers as socialaccount_providers %}
 {% if socialaccount_providers %}
@@ -16,3 +17,33 @@
         {% endfor %}
     {% endelement %}
 {% endif %}
+=======
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% load allauth socialaccount %}
+{% get_providers as socialaccount_providers %}
+
+{% if socialaccount_providers %}
+    <div class="d-grid gap-2">
+        {% element provider_list %}
+            {% for provider in socialaccount_providers %}
+                {% if provider.id == "openid" %}
+                    {% for brand in provider.get_brands %}
+                        {% provider_login_url provider openid=brand.openid_url process=process as href %}
+                        <a href="{{ href }}" class="btn btn-outline-primary custom-social-btn">
+                            <img src="{% static 'icons/openid.png' %}" alt="{{ brand.name }} logo" class="social-icon">
+                            Sign in with {{ brand.name }}
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    {% provider_login_url provider process=process scope=scope auth_params=auth_params as href %}
+                    <a href="{{ href }}" class="btn btn-outline-primary custom-social-btn">
+                        <img src="{% static 'images/'|add:provider.id|add:'.png' %}" alt="{{ provider.name }} logo" class="social-icon">
+                        Sign in with {{ provider.name }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+        {% endelement %}
+    </div>
+{% endif %}
+>>>>>>> 5c52287 (final Helu)

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "account/base_entrance.html" %}
 {% load i18n %}
 {% load allauth account %}
@@ -59,3 +60,102 @@
         {% include "mfa/webauthn/snippets/login_script.html" with button_id="passkey_login" %}
     {% endif %}
 {% endblock %}
+=======
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+{%load static%}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% block style %}
+<style>
+    
+    form p:nth-child(4){
+        display: flex;
+        gap: 10px;
+        
+    }
+    #id_remember{
+        width: 20px;
+        margin-top: 7px;
+    }
+    </style>
+{% endblock style %}
+
+{% load allauth account %}
+{% block head_title %}
+    {% trans "Sign In" %}
+{% endblock head_title %}
+{% block content %}
+    <section class="d-flex align-items-center justify-content-center h-100" style="margin-top: 50px;">
+        <div class="card shadow-lg" style="width: 400px;">
+            <div class="card-body">
+                <h1 class="text-center mb-4">
+                    {% trans "Sign In" %}
+                </h1>
+                <img src="{% static 'images/L1.png' %}" alt="Logo Helu" class="w-50 d-block mx-auto">
+
+                {% if not SOCIALACCOUNT_ONLY %}
+                    {% setvar link %}
+                        <a href="{{ signup_url }}">
+                    {% endsetvar %}
+                    {% setvar end_link %}
+                        </a>
+                    {% endsetvar %}
+                    <p class="text-center mb-4 ">
+                        {% blocktranslate %}If you have not created an account yet, then please {{ link }}sign up{{ end_link }} first.{% endblocktranslate %}
+                    </p>
+                    
+                    {% url 'account_login' as login_url %}
+                    <form method="post" action="{{ login_url }}" class="d-flex flex-column" novalidate>
+                        {% csrf_token %}
+                        
+                        {% element fields form=form unlabeled=True %}
+                        {% endelement %}
+                        
+                        {{ redirect_field }}
+                        
+                       
+
+                        <div class="mb-3">
+                            <button type="submit" class="btn bg-medium-dark text-light w-100 btn-hover">
+                                {% trans "Sign In" %}
+                            </button>
+                        </div>
+                    </form>
+                {% endif %}
+
+                {% if LOGIN_BY_CODE_ENABLED or PASSKEY_LOGIN_ENABLED %}
+                    <hr class="my-4">
+                    <div class="text-center">
+                        {% element button_group vertical=True %}
+                            {% if PASSKEY_LOGIN_ENABLED %}
+                                {% element button type="submit" form="mfa_login" id="passkey_login" tags="btn btn-outline-primary w-100" %}
+                                    {% trans "Sign in with a passkey" %}
+                                {% endelement %}
+                            {% endif %}
+                            {% if LOGIN_BY_CODE_ENABLED %}
+                                {% element button href=request_login_code_url tags="btn btn-outline-primary w-100" %}
+                                    {% trans "Mail me a sign-in code" %}
+                                {% endelement %}
+                            {% endif %}
+                        {% endelement %}
+                    </div>
+                {% endif %}
+                
+                {% if SOCIALACCOUNT_ENABLED %}
+                    <hr class="my-4">
+                    <div class="d-grid gap-2">
+                        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+
+{% block extra_body %}
+    {{ block.super }}
+    {% if PASSKEY_LOGIN_ENABLED %}
+        {% include "mfa/webauthn/snippets/login_script.html" with button_id="passkey_login" %}
+    {% endif %}
+{% endblock %}
+>>>>>>> 5c52287 (final Helu)

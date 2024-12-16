@@ -1,3 +1,4 @@
+
 {% extends 'topicBase.html' %}
 
 {% block content %}
@@ -54,16 +55,19 @@
                     </div>
                 {% else %}
                     <div class="text-center m-4">
-                        <a href="{% url 'account_login' %}" class="btn bg-dark text-light btn-hover">Login untuk Membuat Topik Baru</a>
+
+                        <a href="{% url 'account_login' %}"  class="btn bg-dark text-light btn-hover">Login untuk Membuat Topik Baru dan melihat rincian topik</a>
+
                     </div>
                 {% endif %}
+
+  
                 <a href="{% url 'find_topic' %}" class="fs-5 mb-2 text-start nav-link color-dark"><i class="bi bi-search">Cari Topik</i></a>
 
                     {% for topic in topics %}
                         <li class="list-group-item bg-light1 border-1 border-dark-subtle rounded-3">
                             <a class="text-dark text-decoration-none" href="{% url 'topic_detail' topic.pk %}">
                                 <h4>{{ topic.title }}</h4>
-                                <small class="text-muted">{{topic.created_by}}, {{topic.created_at}}</small>
                                 <p>{{ topic.description }}</p>
                                 {% if topic.image %}
                                     <img src="{{ topic.image.url }}" alt="{{ topic.title }}" class="img-thumbnail" style="max-width: 100%; height: auto;">
@@ -96,11 +100,13 @@
                                 </div>       
                             </a>
                             {% if request.user == topic.created_by or request.user.is_staff %}
-                                <a href="{% url 'edit_topic' pk=topic.pk %}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square fs-5"></i></a>
+                                <a href="{% url 'edit_topic' pk=topic.pk %}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square fs-6"></i></a>
                             {% endif %}
                             {% if request.user == topic.created_by or request.user.is_staff %}
-                                <button class="btn btn-danger btn-sm float-end" data-bs-toggle="modal" data-bs-target="#deleteTopicModal-{{ topic.pk }}"><i class="bi bi-trash fs-5"></i></button>
+                                <button class="btn btn-danger btn-sm float-end" data-bs-toggle="modal" data-bs-target="#deleteTopicModal-{{ topic.pk }}"><i class="bi bi-trash fs-6"></i></button>
+                                
                             {% endif %}
+                    
                         </li>
 
                         {# Modal Bootstrap untuk konfirmasi penghapusan #}

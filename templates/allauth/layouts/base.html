@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% load i18n %}
 {% load socialaccount %}
 <!DOCTYPE html>
@@ -88,3 +89,252 @@
     </div>
     </body>
 </html>
+=======
+{% load i18n %}
+{%load static%}
+{% load socialaccount %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{%static 'css/custom.css'%}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      
+        <title>
+            {% block head_title %}
+            {% endblock head_title %}
+        </title>
+        {% block extra_head %}
+        {% endblock extra_head %}
+        {% block style %}
+        {% endblock style %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg bg-medium-dark fixed-top px-3 py-2 border-bottom border-2 border-dark bounce">
+            <div class="container-fluid">
+                <!-- Logo dan Judul -->
+                <img src="{% static 'images/L1.png' %}" alt="Logo" width="70" class="d-inline-block align-text-top">
+                <h1 class="nav-text fs-4 fw-bolder color-dark">Helping Education</h1>
+          
+                <!-- Toggle Button untuk Mobile -->
+                <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+          
+                <!-- Konten Navbar -->
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav ms-auto">
+                          <li class="nav-item m-2">
+                              <a class="nav-link color-light" href="{% url 'home:index' %}">Home</a>
+                          </li>
+                          <li class="nav-item m-2">
+                              <a class="nav-link color-light" href="{% url 'classPage:class_page' %}">Class</a>
+                          </li>
+                          <li class="nav-item m-2">
+                              <a class="nav-link color-light" href="{% url 'home:about' %}">About Us</a>
+                          </li>
+                          <li class="nav-item m-2">
+                              <a class="nav-link color-light" href="{% url 'contact:contact' %}">Contact Us</a>
+                          </li>
+                          <li class="nav-item m-2">
+                              <a class="nav-link color-light" href="{% url 'topic_list' %}">Forum</a>
+                          </li>
+      
+                          <!-- Tombol Login/Logout atau Profil User -->
+                      {% if user.is_authenticated %}
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle d-flex align-items-center color-light" href="#" role="button" data-bs-toggle="dropdown">
+                              <span class="ms-2">{{ user.username }}</span>
+                          </a>
+                          <ul class="dropdown-menu dropdown-menu-end">
+                              <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+                          </ul>
+                      </li>
+                  {% else %}
+                      <li class="nav-item m-2">
+                          <a class="btn btn-md bg-light1 border-0 rounded-5 color-dark" href="{% url 'account_login' %}">Sign In</a>
+                      </li>
+                      <li class="nav-item m-2">
+                          <a class="btn btn-md bg-dark1 border-0 rounded-5 color-medium-light" href="{% url 'account_signup' %}">Sign Up</a>
+                      </li>
+                  {% endif %}
+      
+                         
+                      </ul>
+                  </div>
+            </div>
+        </nav>
+        <div class="container my-5 pt-5 " style="margin-top: 100px;">
+        {% block body %}
+            <div>
+              <div class="container">
+                <div class="row">
+                    {% if user.is_authenticated %}
+                        {% url 'account_email' as email_url_ %}
+                        {% if email_url_ %}
+                            <div class="col-3 mb-3">
+                                <a href="{{ email_url_ }}" class="btn btn-primary w-100 p-4">{% trans "Change Email" %}</a>
+                            </div>
+                        {% endif %}
+                        {% url 'account_change_password' as change_password_url_ %}
+                        {% if change_password_url_ %}
+                            <div class="col-3 mb-3">
+                                <a href="{{ change_password_url_ }}" class="btn btn-primary w-100 p-4">{% trans "Change Password" %}</a>
+                            </div>
+                        {% endif %}
+                        {% url 'socialaccount_connections' as connections_url_ %}
+                        {% if connections_url_ %}
+                            <div class="col-3 mb-3">
+                                <a href="{{ connections_url_ }}" class="btn btn-primary w-100 p-4">{% trans "Account Connections" %}</a>
+                            </div>
+                        {% endif %}
+                        {% url 'mfa_index' as mfa_url_ %}
+                        {% if mfa_url_ %}
+                            <div class="col-3 mb-3">
+                                <a href="{{ mfa_url_ }}" class="btn btn-primary w-100 p-4">{% trans "Two-Factor Authentication" %}</a>
+                            </div>
+                        {% endif %}
+                        {% url 'usersessions_list' as usersessions_list_url_ %}
+                        {% if usersessions_list_url_ %}
+                            <div class="col-3 mb-3">
+                                <a href="{{ usersessions_list_url_ }}" class="btn btn-primary w-100 p-4">{% trans "Sessions" %}</a>
+                            </div>
+                        {% endif %}
+                        {% url 'account_logout' as logout_url_ %}
+                        {% if logout_url_ %}
+                            <div class="col-3 mb-3">
+                                <a href="{{ logout_url_ }}" class="btn btn-danger w-100 p-4">{% trans "Sign Out" %}</a>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                    {% endif %}
+                </div>
+            </div>
+            
+            
+            </div>
+            {% block content %}
+            {% endblock content %}
+        {% endblock body %}
+        {% block extra_body %}
+        {% endblock extra_body %}
+    </div>
+        <footer class="footer bg-medium-dark text-white py-5 ">
+            <div class="container">
+              <div class="row">
+                <!-- Logo and Company Info -->
+                <div class=" col-md-4 footer-column d-flex align-items-center">
+                  <div class="logo">
+                    <img src="{%static 'images/L1.png'%}" alt="Helu Logo" class="img-fluid">
+                  </div>
+                  <article>
+                    <h5>Helu</h5>
+                    <p>PT Edukasi Jaya</p>
+                    <p>Alamat Jalan Kebon Sirih, Kota Jakarta Pusat, Provinsi DKI Jakarta, Indonesia</p>
+                    <p>Telepon: (+62)6764653657</p>
+                    <p>Email: Heluofficial@gmail.com</p>
+                  </article>
+                </div>
+          
+               <!-- Quick Links -->
+            <section class="col-md-4  footer-column m-auto d-flex flex-column align-items-lg-center align-items-md-center align-items-sm-start">
+              <div shadow-sm >
+                <header>
+                  <h5>Quick Link</h5>
+                </header>
+                <article>
+                <ul class="list-unstyled">
+                  <li><a href="{% url 'home:index' %}">Home</a></li>
+                  <li><a href="{% url 'classPage:class_page' %}">Class</a></li>
+                  <li><a href="{% url 'home:about' %}">About</a></li>
+                  <li><a href="{% url 'home:about' %}">Contact Us</a></li>
+                  <li><a href="{% url 'account_login' %}">Sign In</a></li>
+                  <li><a href="{% url 'topic_list' %}">Forum</a></li>
+                </ul>
+              </article>
+                
+                <!-- Service Program -->
+                 <header>
+                  <h5>Service Program</h5>
+                 </header>
+                <article>
+                  <ul class="list-unstyled">
+                    <li><a href="#">Reading</a></li>
+                    <li><a href="#">Speaking</a></li>
+                    <li><a href="#">Listening</a></li>
+                    <li><a href="#">Writing</a></li>
+                    <li><a href="#">Grammar</a></li>
+                    <li><a href="#">TOEFL Preparation</a></li>
+                    <li><a href="#">IELTS Preparation</a></li>
+                  </ul>
+                </article>
+              </div>
+            </section>
+          
+                <!-- Social Links -->
+                <section class="col-md-4  footer-column">
+                  <header>
+                    <h5>Connect With Us</h5>
+                  </header>
+                  
+                  <article>
+                    <ul class="list-unstyled social-links">
+                      <li>
+                        <a href="https://www.youtube.com/HELUOfficial" class="text-white">
+                          <i class="bi bi-youtube text-danger"></i> HELU Official
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://www.facebook.com/HELUOfficial" class="text-white">
+                          <i class="bi bi-facebook text-primary"></i> HELU Official
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://www.linkedin.com/company/HELUOfficial" class="text-white">
+                          <i class="bi bi-linkedin text-primary"></i> HELU Official
+                        </a>
+                      </li>
+                      <li>
+                        <a href="tel:+626764653657" class="text-white">
+                          <i class="bi bi-whatsapp text-success"></i> +626764653657
+                        </a>
+                      </li>
+                      <li>
+                        <a href="mailto:Heluofficial@gmail.com" class="text-white">
+                          <i class="bi bi-envelope text-white"></i> Heluofficial@gmail.com
+                        </a>
+                      </li>
+                    </ul>
+                  </article>
+                  
+          
+                  <!-- Search Form -->
+                   <header>
+                    <h5>Search</h5>
+                   </header>
+                  <article>
+                    <form id="search-form" class="d-flex">
+                      <input type="text" id="search-input" class="form-control me-2" placeholder="Cari..." aria-label="Search">
+                      <button class="btn btn-outline-light" type="submit">Cari</button>
+                    </form>
+                  </article>
+                </section>
+              </div>
+            </div>
+          </footer>
+          <section class="container-fluid text-center bg-light">
+            <p class="mb-0">&copy; 2024 kelompok8. All Rights Reserved.</p>
+          </section>
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    {% block js %}{% endblock js %}
+    
+    </body>
+</html>
+>>>>>>> 5c52287 (final Helu)

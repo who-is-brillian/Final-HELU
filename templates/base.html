@@ -27,63 +27,18 @@
           </button>
     
           <!-- Konten Navbar -->
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav ms-auto">
-                  <!-- Navigasi Halaman -->
-                  <li class="nav-item m-2">
-                      <a class="nav-link active color-light" aria-current="page" href="{% url 'home:index' %}">Home</a>
-                  </li>
-                  <li class="nav-item m-2">
-                      <a class="nav-link color-light" href="{% url 'classPage:class_page' %}">Class</a>
-                  </li>
-                  {% if request.user.is_authenticated and request.user.lmspermission.is_allowed %}
-                  <li class="nav-item m-2"><a class="nav-link color-light" href="{% url 'course_page' %}">Course</a></li>
-                  {% endif %}
-                  <li class="nav-item m-2">
-                      <a class="nav-link color-light" href="{% url 'home:about' %}">About Us</a>
-                  </li>
-                  <li class="nav-item m-2">
-                      <a class="nav-link color-light" href="{% url 'contact:contact' %}">Contact Us</a>
-                  </li>
-                  <li class="nav-item m-2">
-                    <a class="nav-link color-light" href="{% url 'topic_list' %}">Forum</a>
-                  </li> 
-    
-                  <!-- Tombol Login/Sign Up atau Profil User -->
-                  {% if user.is_authenticated %}
-                  <!-- Jika user sudah login -->
-                  <li class="nav-item dropdown ">
-                      <a class="nav-link dropdown-toggle d-flex align-items-center color-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          <!-- Gambar Profil -->
-                          <img src="{{ user.userprofileinfo.profile_pic.url }}" alt="Profile Picture" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
-                          <!-- Nama User -->
-                          <span class="ms-2">{{ user.username }}</span>
-                      </a>
-                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                          <li><a class="dropdown-item" href="/profile/">My Profile</a></li>
-                          <li><a class="dropdown-item" href="{% url 'user:user_logout' %}">Logout</a></li>
-                      </ul>
-                  </li>
-                  {% else %}
-                  <!-- Jika user belum login -->
-                  <li class="nav-item m-2">
-                      <a class="btn-signIn btn btn-md bg-light1 border-0 rounded-5 color-dark" href="{% url 'user:user_login' %}">Sign In</a>
-                  </li>
-                  <li class="nav-item m-2">
-                      <a class="btn-signUp btn btn-md bg-dark1 border-0 rounded-5 color-medium-light" href="{% url 'user:register' %}">Sign Up</a>
-                  </li>
-                  {% endif %}
-              </ul>
-          </div>
           <!-- Konten Navbar -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item m-2">
-                        <a class="nav-link active color-light" href="{% url 'home:index' %}">Home</a>
+                        <a class="nav-link color-light" href="{% url 'home:index' %}">Home</a>
                     </li>
                     <li class="nav-item m-2">
                         <a class="nav-link color-light" href="{% url 'classPage:class_page' %}">Class</a>
                     </li>
+                    {% if request.user.is_authenticated and request.user.lmspermission.is_allowed %}
+                    <li class="nav-item m-2"><a class="nav-link color-light" href="{% url 'course_page' %}">Course</a></li>
+                    {% endif %}
                     <li class="nav-item m-2">
                         <a class="nav-link color-light" href="{% url 'home:about' %}">About Us</a>
                     </li>
@@ -93,19 +48,10 @@
                     <li class="nav-item m-2">
                         <a class="nav-link color-light" href="{% url 'topic_list' %}">Forum</a>
                     </li>
-
-<<<<<<< HEAD
-=======
-                    <p>show_nav_button: {{ show_nav_button }}</p>  <!-- Menampilkan nilai show_nav_button -->
-                    <!-- Menampilkan tombol hanya jika show_nav_button True -->
-                    {% if show_nav_button %}
-                        <a class="nav-link color-light" href="{% url 'topic_list' %}">Masuk Kelas</a>
-                    {% endif %}
                     
 
 
               
->>>>>>> 3385c2f (pendaftaran)
                     <!-- Tombol Login/Logout atau Profil User -->
                 {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
@@ -113,7 +59,6 @@
                         <span class="ms-2">{{ user.username }}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="/profile/">My Profile</a></li>
                         <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                     </ul>
                 </li>
@@ -129,9 +74,9 @@
                    
                 </ul>
             </div>
-      </div>
-  </nav>
-  
+
+         </div>
+         </nav>
     {%block content%}
 
     {%endblock content%}
@@ -164,7 +109,7 @@
             <li><a href="{% url 'classPage:class_page' %}">Class</a></li>
             <li><a href="{% url 'home:about' %}">About</a></li>
             <li><a href="{% url 'home:about' %}">Contact Us</a></li>
-            <li><a href="{% url 'user:user_login' %}">Sign In</a></li>
+            <li><a href="{% url 'account_login' %}">Sign In</a></li>
             <li><a href="{% url 'topic_list' %}">Forum</a></li>
             <li><a href="{% url 'testimonials' %}">Testimonials</a></li>
           </ul>
@@ -247,6 +192,7 @@
     <script src="{%static 'js/bootstrap.bundle.min.js'%}"></script>
     <script src="{%static 'js/popper.min.js'%}"></script>
     <script src="{%static 'js/custom.js'%}"></script>
+    <script src="{% static 'js/update_harga.js' %}"></script>
     {%block js%} {%endblock js%}
 
 </body>
